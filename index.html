@@ -58,6 +58,9 @@
     z-index: 9998;
     transition: transform 0.25s ease, width 0.2s, height 0.2s;
   }
+  @media (hover: none), (pointer: coarse) {
+    .cursor, .cursor-follower { display: none !important; }
+  }
 
   /* NAV */
   nav {
@@ -216,7 +219,8 @@
     max-width: 1200px; width: 100%;
     display: grid; grid-template-columns: 1fr 1fr;
     gap: 60px; align-items: center;
-    padding-top: 80px;
+    padding-top: 100px;
+    padding-bottom: 60px;
   }
   .hero-left {}
   .hero-tag {
@@ -258,6 +262,10 @@
     display: flex; gap: 16px; flex-wrap: wrap;
     opacity: 0; transform: translateY(20px);
     animation: fadeUp 0.7s ease forwards 0.9s;
+    margin-bottom: 0;
+  }
+  .hero-left {
+    padding-bottom: 20px;
   }
   .btn-primary {
     background: var(--yellow);
@@ -348,6 +356,8 @@
     overflow: hidden;
     padding: 14px 0;
     white-space: nowrap;
+    position: relative;
+    z-index: 1;
   }
   .ticker {
     display: inline-flex; gap: 0;
@@ -435,8 +445,30 @@
   .about-box {
     background: var(--dark2);
     border: 1px solid rgba(255,230,0,0.15);
-    padding: 48px;
+    padding: 0;
     position: relative; overflow: hidden;
+    min-height: 480px;
+  }
+  .about-box-slides {
+    position: absolute; inset: 0;
+    z-index: 0;
+  }
+  .about-box-slide {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+  }
+  .about-box-slide.active { opacity: 1; }
+  .about-box-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(8,8,8,0.82) 0%, rgba(8,8,8,0.55) 60%, rgba(8,8,8,0.35) 100%);
+    z-index: 1;
+  }
+  .about-box-content {
+    position: relative; z-index: 2;
+    padding: 48px;
+    height: 100%;
   }
   .about-box::before {
     content: '';
@@ -444,7 +476,20 @@
     width: 80px; height: 80px;
     background: var(--yellow);
     clip-path: polygon(100% 0, 100% 100%, 0 0);
+    z-index: 3;
   }
+  .about-box-slide-dots {
+    position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 8px; z-index: 4;
+  }
+  .slide-dot {
+    width: 6px; height: 6px;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.3);
+    transition: background 0.3s, width 0.3s;
+    cursor: pointer;
+  }
+  .slide-dot.active { background: var(--yellow); width: 20px; }
   .about-box-title {
     font-family: var(--font-display);
     font-size: 52px; color: var(--yellow);
@@ -482,34 +527,55 @@
   .classes-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2px;
+    gap: 3px;
     margin-top: 60px;
   }
   .class-card {
-    background: var(--dark2);
-    padding: 40px 32px;
-    border-top: 2px solid transparent;
-    transition: border-color 0.3s, background 0.3s, transform 0.3s;
-    cursor: default;
     position: relative; overflow: hidden;
+    min-height: 320px;
+    cursor: default;
+    transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
   }
-  .class-card::after {
-    content: '';
-    position: absolute; bottom: 0; left: 0;
-    width: 100%; height: 0;
-    background: rgba(255,230,0,0.04);
-    transition: height 0.4s;
+  .class-card-bg {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    transition: transform 0.6s ease;
+    filter: brightness(0.45) saturate(0.8);
   }
-  .class-card:hover { border-color: var(--yellow); background: var(--dark3); transform: translateY(-4px); }
-  .class-card:hover::after { height: 100%; }
+  .class-card:hover .class-card-bg {
+    transform: scale(1.08);
+    filter: brightness(0.35) saturate(1);
+  }
+  .class-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(8,8,8,0.95) 0%, rgba(8,8,8,0.5) 50%, rgba(8,8,8,0.15) 100%);
+    transition: background 0.4s;
+  }
+  .class-card:hover .class-card-overlay {
+    background: linear-gradient(to top, rgba(8,8,8,0.98) 0%, rgba(8,8,8,0.65) 50%, rgba(255,230,0,0.08) 100%);
+  }
+  .class-card-border {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: transparent;
+    transition: background 0.3s;
+    z-index: 3;
+  }
+  .class-card:hover .class-card-border { background: var(--yellow); }
+  .class-card-inner {
+    position: relative; z-index: 2;
+    padding: 40px 32px;
+    height: 100%; display: flex; flex-direction: column; justify-content: flex-end;
+  }
   .class-num {
     font-family: var(--font-display);
-    font-size: 72px; color: rgba(255,230,0,0.08);
+    font-size: 72px; color: rgba(255,230,0,0.15);
     line-height: 1; margin-bottom: 16px;
     transition: color 0.3s;
+    position: absolute; top: 20px; left: 28px;
   }
-  .class-card:hover .class-num { color: rgba(255,230,0,0.2); }
-  .class-icon { font-size: 32px; margin-bottom: 16px; }
+  .class-card:hover .class-num { color: rgba(255,230,0,0.35); }
+  .class-icon { font-size: 32px; margin-bottom: 12px; }
   .class-name {
     font-family: var(--font-head);
     font-size: 22px; font-weight: 900;
@@ -517,11 +583,29 @@
     text-transform: uppercase;
     margin-bottom: 10px;
     color: var(--white);
+    transition: color 0.3s;
   }
+  .class-card:hover .class-name { color: var(--yellow); }
   .class-desc {
-    font-size: 14px; line-height: 1.6;
-    color: rgba(245,245,240,0.5);
+    font-size: 13px; line-height: 1.6;
+    color: rgba(245,245,240,0.55);
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.4s;
+    opacity: 0;
   }
+  .class-card:hover .class-desc { max-height: 80px; opacity: 1; }
+  .class-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-head);
+    font-size: 10px; letter-spacing: 0.2em;
+    color: var(--yellow);
+    font-weight: 700; text-transform: uppercase;
+    margin-bottom: 8px;
+    opacity: 0; transform: translateY(8px);
+    transition: opacity 0.4s, transform 0.4s;
+  }
+  .class-card:hover .class-tag { opacity: 1; transform: translateY(0); }
+  .class-tag::before { content: ''; display: block; width: 20px; height: 1px; background: var(--yellow); }
 
   /* PRICING */
   .pricing-grid {
@@ -701,18 +785,26 @@
   /* TESTIMONIALS */
   .testi-section { background: var(--dark); padding: 120px 40px; max-width: none; }
   .testi-inner { max-width: 1400px; margin: 0 auto; }
-  .testi-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 2px; margin-top: 60px;
+  .testi-carousel-wrap {
+    position: relative; margin-top: 60px; overflow: hidden;
+  }
+  .testi-carousel-track {
+    display: flex;
+    gap: 3px;
+    transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+    will-change: transform;
   }
   .testi-card {
     background: var(--dark2);
     padding: 40px;
     border-bottom: 2px solid transparent;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, background 0.3s;
     position: relative;
+    flex: 0 0 calc(33.333% - 2px);
+    min-width: calc(33.333% - 2px);
+    box-sizing: border-box;
   }
-  .testi-card:hover { border-color: var(--yellow); }
+  .testi-card:hover { border-color: var(--yellow); background: var(--dark3); }
   .testi-quote {
     font-family: var(--font-display);
     font-size: 80px; line-height: 0.6;
@@ -735,6 +827,7 @@
     font-family: var(--font-display);
     font-size: 20px; color: var(--black);
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    flex-shrink: 0;
   }
   .testi-name {
     font-family: var(--font-head);
@@ -745,7 +838,38 @@
     font-size: 12px; color: rgba(245,245,240,0.4);
     letter-spacing: 0.1em;
   }
-  .testi-stars { color: var(--yellow); font-size: 13px; letter-spacing: 2px; }
+  .testi-stars { color: var(--yellow); font-size: 13px; letter-spacing: 2px; margin-bottom: 12px; }
+  .testi-controls {
+    display: flex; align-items: center; justify-content: center;
+    gap: 16px; margin-top: 40px;
+  }
+  .testi-dots {
+    display: flex; gap: 8px; align-items: center;
+  }
+  .testi-dot {
+    width: 6px; height: 6px; border-radius: 3px;
+    background: rgba(255,255,255,0.2);
+    transition: background 0.3s, width 0.3s;
+    cursor: pointer;
+  }
+  .testi-dot.active { background: var(--yellow); width: 24px; }
+  .testi-nav-btn {
+    width: 44px; height: 44px;
+    border: 1px solid rgba(255,230,0,0.3);
+    background: transparent;
+    color: var(--yellow);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    font-size: 18px;
+  }
+  .testi-nav-btn:hover { background: rgba(255,230,0,0.1); border-color: var(--yellow); }
+  @media (max-width: 900px) {
+    .testi-card { flex: 0 0 calc(100% - 2px); min-width: calc(100% - 2px); }
+  }
+  @media (min-width: 901px) and (max-width: 1200px) {
+    .testi-card { flex: 0 0 calc(50% - 2px); min-width: calc(50% - 2px); }
+  }
 
   /* CTA SECTION */
   .cta-section {
@@ -910,7 +1034,8 @@
     .about-inner { grid-template-columns: 1fr; gap: 40px; }
     .pricing-grid { grid-template-columns: 1fr; gap: 2px; }
     .branches-grid { grid-template-columns: repeat(2, 1fr); }
-    .testi-grid { grid-template-columns: 1fr; }
+    .testi-carousel-wrap { overflow: hidden; }
+    .testi-card { flex: 0 0 100%; min-width: 100%; }
     .footer-inner { grid-template-columns: 1fr; gap: 32px; }
     .footer-bottom { flex-direction: column; align-items: flex-start; }
     .cta-section { padding: 80px 24px; }
@@ -1073,18 +1198,35 @@
     </div>
     <div class="about-visual reveal-right">
       <div class="about-box">
-        <div class="about-box-title">WHY<br>SHINE?</div>
-        <div class="about-box-sub">Keunggulan Kami</div>
-        <ul class="feature-list">
-          <li><span class="icon">🏋️</span> Alat fitness lengkap & modern</li>
-          <li><span class="icon">🌟</span> Kelas gratis (Zumba, Yoga, dll)</li>
-          <li><span class="icon">📍</span> 40+ lokasi se-Jabodetabek</li>
-          <li><span class="icon">💰</span> Harga mulai Rp 200.000/bulan</li>
-          <li><span class="icon">🔓</span> Fitness 3 lantai tanpa batas</li>
-          <li><span class="icon">🚿</span> Kamar mandi & loker bersih</li>
-          <li><span class="icon">👨‍🏫</span> Personal Trainer profesional</li>
-          <li><span class="icon">⭐</span> Member Prioritas akses semua cabang</li>
-        </ul>
+        <div class="about-box-slides" id="aboutSlides">
+          <div class="about-box-slide active" style="background-image:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80')"></div>
+          <div class="about-box-slide" style="background-image:url('https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&q=80')"></div>
+          <div class="about-box-slide" style="background-image:url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80')"></div>
+          <div class="about-box-slide" style="background-image:url('https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=800&q=80')"></div>
+          <div class="about-box-slide" style="background-image:url('https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=800&q=80')"></div>
+        </div>
+        <div class="about-box-overlay"></div>
+        <div class="about-box-content">
+          <div class="about-box-title">WHY<br>SHINE?</div>
+          <div class="about-box-sub">Keunggulan Kami</div>
+          <ul class="feature-list">
+            <li><span class="icon">🏋️</span> Alat fitness lengkap & modern</li>
+            <li><span class="icon">🌟</span> Kelas gratis (Zumba, Yoga, dll)</li>
+            <li><span class="icon">📍</span> 40+ lokasi se-Jabodetabek</li>
+            <li><span class="icon">💰</span> Harga mulai Rp 200.000/bulan</li>
+            <li><span class="icon">🔓</span> Fitness 3 lantai tanpa batas</li>
+            <li><span class="icon">🚿</span> Kamar mandi & loker bersih</li>
+            <li><span class="icon">👨‍🏫</span> Personal Trainer profesional</li>
+            <li><span class="icon">⭐</span> Member Prioritas akses semua cabang</li>
+          </ul>
+        </div>
+        <div class="about-box-slide-dots" id="aboutDots">
+          <div class="slide-dot active" onclick="goToSlide(0)"></div>
+          <div class="slide-dot" onclick="goToSlide(1)"></div>
+          <div class="slide-dot" onclick="goToSlide(2)"></div>
+          <div class="slide-dot" onclick="goToSlide(3)"></div>
+          <div class="slide-dot" onclick="goToSlide(4)"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -1099,52 +1241,100 @@
     </div>
     <div class="classes-grid">
       <div class="class-card reveal" style="transition-delay:0.1s">
-        <div class="class-num">01</div>
-        <div class="class-icon">💃</div>
-        <div class="class-name">Zumba</div>
-        <div class="class-desc">Dance fitness yang menyenangkan. Bakar kalori sambil bergoyang dengan musik Latin yang enerjik.</div>
+        <div class="class-card-bg" style="background-image:url('https://images.unsplash.com/photo-1518611012118-696072aa579a?w=700&q=80')"></div>
+        <div class="class-card-overlay"></div>
+        <div class="class-card-border"></div>
+        <div class="class-card-inner">
+          <div class="class-num">01</div>
+          <div class="class-tag">Free Class</div>
+          <div class="class-icon">💃</div>
+          <div class="class-name">Zumba</div>
+          <div class="class-desc">Dance fitness yang menyenangkan. Bakar kalori sambil bergoyang dengan musik Latin yang enerjik.</div>
+        </div>
       </div>
       <div class="class-card reveal" style="transition-delay:0.15s">
-        <div class="class-num">02</div>
-        <div class="class-icon">🏃</div>
-        <div class="class-name">Aerobic</div>
-        <div class="class-desc">Gerakan kardio dinamis untuk meningkatkan stamina, kekuatan jantung, dan membakar lemak optimal.</div>
+        <div class="class-card-bg" style="background-image:url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=700&q=80')"></div>
+        <div class="class-card-overlay"></div>
+        <div class="class-card-border"></div>
+        <div class="class-card-inner">
+          <div class="class-num">02</div>
+          <div class="class-tag">Free Class</div>
+          <div class="class-icon">🏃</div>
+          <div class="class-name">Aerobic</div>
+          <div class="class-desc">Gerakan kardio dinamis untuk meningkatkan stamina, kekuatan jantung, dan membakar lemak optimal.</div>
+        </div>
       </div>
       <div class="class-card reveal" style="transition-delay:0.2s">
-        <div class="class-num">03</div>
-        <div class="class-icon">🥊</div>
-        <div class="class-name">Body Combat</div>
-        <div class="class-desc">Kombinasi teknik bela diri dalam kelas kardio intensitas tinggi yang membakar lebih banyak kalori.</div>
+        <div class="class-card-bg" style="background-image:url('https://images.unsplash.com/photo-1555597673-b21d5c935865?w=700&q=80')"></div>
+        <div class="class-card-overlay"></div>
+        <div class="class-card-border"></div>
+        <div class="class-card-inner">
+          <div class="class-num">03</div>
+          <div class="class-tag">Free Class</div>
+          <div class="class-icon">🥊</div>
+          <div class="class-name">Body Combat</div>
+          <div class="class-desc">Kombinasi teknik bela diri dalam kelas kardio intensitas tinggi yang membakar lebih banyak kalori.</div>
+        </div>
       </div>
       <div class="class-card reveal" style="transition-delay:0.25s">
-        <div class="class-num">04</div>
-        <div class="class-icon">🧘</div>
-        <div class="class-name">Yoga</div>
-        <div class="class-desc">Keseimbangan tubuh dan pikiran. Tingkatkan fleksibilitas, ketenangan, dan kekuatan dari dalam.</div>
+        <div class="class-card-bg" style="background-image:url('https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?w=700&q=80')"></div>
+        <div class="class-card-overlay"></div>
+        <div class="class-card-border"></div>
+        <div class="class-card-inner">
+          <div class="class-num">04</div>
+          <div class="class-tag">Free Class</div>
+          <div class="class-icon">🧘</div>
+          <div class="class-name">Yoga</div>
+          <div class="class-desc">Keseimbangan tubuh dan pikiran. Tingkatkan fleksibilitas, ketenangan, dan kekuatan dari dalam.</div>
+        </div>
       </div>
       <div class="class-card reveal" style="transition-delay:0.3s">
-        <div class="class-num">05</div>
-        <div class="class-icon">🔥</div>
-        <div class="class-name">Fat Loss Class</div>
-        <div class="class-desc">Program khusus pembakaran lemak dengan kombinasi HIIT dan latihan metabolisme tinggi.</div>
+        <div class="class-card-bg" style="background-image:url('https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?w=700&q=80')"></div>
+        <div class="class-card-overlay"></div>
+        <div class="class-card-border"></div>
+        <div class="class-card-inner">
+          <div class="class-num">05</div>
+          <div class="class-tag">Free Class</div>
+          <div class="class-icon">🔥</div>
+          <div class="class-name">Fat Loss Class</div>
+          <div class="class-desc">Program khusus pembakaran lemak dengan kombinasi HIIT dan latihan metabolisme tinggi.</div>
+        </div>
       </div>
       <div class="class-card reveal" style="transition-delay:0.35s">
-        <div class="class-num">06</div>
-        <div class="class-icon">✨</div>
-        <div class="class-name">Shine Dance</div>
-        <div class="class-desc">Kelas dance eksklusif Duo Shine. Ekspresikan diri sambil membentuk tubuh ideal dengan gerakan yang fun.</div>
+        <div class="class-card-bg" style="background-image:url('https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=700&q=80')"></div>
+        <div class="class-card-overlay"></div>
+        <div class="class-card-border"></div>
+        <div class="class-card-inner">
+          <div class="class-num">06</div>
+          <div class="class-tag">Free Class</div>
+          <div class="class-icon">✨</div>
+          <div class="class-name">Shine Dance</div>
+          <div class="class-desc">Kelas dance eksklusif Duo Shine. Ekspresikan diri sambil membentuk tubuh ideal dengan gerakan yang fun.</div>
+        </div>
       </div>
       <div class="class-card reveal" style="transition-delay:0.4s">
-        <div class="class-num">07</div>
-        <div class="class-icon">🩰</div>
-        <div class="class-name">Belly Dance</div>
-        <div class="class-desc">Seni tari perut yang memperindah postur, melatih fleksibilitas, dan membentuk otot core secara alami.</div>
+        <div class="class-card-bg" style="background-image:url('https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=700&q=80')"></div>
+        <div class="class-card-overlay"></div>
+        <div class="class-card-border"></div>
+        <div class="class-card-inner">
+          <div class="class-num">07</div>
+          <div class="class-tag">Free Class</div>
+          <div class="class-icon">🩰</div>
+          <div class="class-name">Belly Dance</div>
+          <div class="class-desc">Seni tari perut yang memperindah postur, melatih fleksibilitas, dan membentuk otot core secara alami.</div>
+        </div>
       </div>
       <div class="class-card reveal" style="transition-delay:0.45s">
-        <div class="class-num">08</div>
-        <div class="class-icon">💪</div>
-        <div class="class-name">Strong Nation</div>
-        <div class="class-desc">Latihan kekuatan berbasis musik yang menantang seluruh otot tubuh dalam ritme yang memotivasi.</div>
+        <div class="class-card-bg" style="background-image:url('https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=700&q=80')"></div>
+        <div class="class-card-overlay"></div>
+        <div class="class-card-border"></div>
+        <div class="class-card-inner">
+          <div class="class-num">08</div>
+          <div class="class-tag">Free Class</div>
+          <div class="class-icon">💪</div>
+          <div class="class-name">Strong Nation</div>
+          <div class="class-desc">Latihan kekuatan berbasis musik yang menantang seluruh otot tubuh dalam ritme yang memotivasi.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -1292,43 +1482,98 @@
       <div class="section-tag">Testimoni Member</div>
       <h2 class="section-title">APA KATA<br><span class="y">MEREKA?</span></h2>
     </div>
-    <div class="testi-grid">
-      <div class="testi-card reveal" style="transition-delay:0.1s">
-        <div class="testi-quote">"</div>
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">Udah 2 tahun jadi member Duo Shine Meruya. Alatnya lengkap banget, kelasnya gratis, dan harganya jauh lebih murah dibanding gym lain dengan kualitas serupa. Highly recommended!</p>
-        <div class="testi-author">
-          <div class="testi-avatar">R</div>
-          <div>
-            <div class="testi-name">Rizky A.</div>
-            <div class="testi-since">Member since 2022 · Jakarta Barat</div>
+    <div class="testi-carousel-wrap reveal">
+      <div class="testi-carousel-track" id="testiTrack">
+        <div class="testi-card">
+          <div class="testi-quote">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">Udah 2 tahun jadi member Duo Shine Meruya. Alatnya lengkap banget, kelasnya gratis, dan harganya jauh lebih murah dibanding gym lain dengan kualitas serupa. Highly recommended!</p>
+          <div class="testi-author">
+            <div class="testi-avatar">R</div>
+            <div>
+              <div class="testi-name">Rizky A.</div>
+              <div class="testi-since">Member since 2022 · Jakarta Barat</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-quote">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">Kelas Zumba-nya asik banget! Instructornya profesional dan energetik. Dengan paket Prioritas, bisa pindah cabang sesuka hati. Super worth it untuk harga segitu.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">S</div>
+            <div>
+              <div class="testi-name">Sari D.</div>
+              <div class="testi-since">Member since 2021 · Depok</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-quote">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">Gym murah tapi kualitasnya premium. Design interiornya keren, bersih, dan alatnya selalu terawat. Promo bayar 3 gratis 1 itu beneran untung banget buat kita yang mau konsisten!</p>
+          <div class="testi-author">
+            <div class="testi-avatar">F</div>
+            <div>
+              <div class="testi-name">Fahmi P.</div>
+              <div class="testi-since">Member since 2023 · Tangerang</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-quote">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">Sejak ikut kelas Body Combat di Duo Shine, berat badan turun 8kg dalam 3 bulan. Trainernya supportif banget dan suasananya bikin semangat terus. Nggak nyesel daftar!</p>
+          <div class="testi-author">
+            <div class="testi-avatar">A</div>
+            <div>
+              <div class="testi-name">Anisa W.</div>
+              <div class="testi-since">Member since 2023 · Bekasi</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-quote">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">Member Prioritas paling worth it sih. Bisa akses semua cabang, jadi kalau lagi di luar daerah tetap bisa gym. Lokernya bersih, kamar mandinya nyaman. 10/10 recommended!</p>
+          <div class="testi-author">
+            <div class="testi-avatar">B</div>
+            <div>
+              <div class="testi-name">Bagas M.</div>
+              <div class="testi-since">Member since 2020 · Jakarta Selatan</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-quote">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">Yoga class-nya bikin tenang banget. Instructornya ramah, tempatnya nyaman, dan gratis sudah include di membership. Setelah kerja langsung cabang Pamulang, hemat waktu dan uang!</p>
+          <div class="testi-author">
+            <div class="testi-avatar">D</div>
+            <div>
+              <div class="testi-name">Dewi R.</div>
+              <div class="testi-since">Member since 2022 · Tangerang Selatan</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-quote">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">Buat yang baru mau mulai gym, Duo Shine pilihan tepat. Staff-nya friendly, nggak sombong, mau bantu jelasin alat. Alatnya lengkap dan selalu dijaga kebersihannya. Lanjut terus!</p>
+          <div class="testi-author">
+            <div class="testi-avatar">H</div>
+            <div>
+              <div class="testi-name">Hendra K.</div>
+              <div class="testi-since">Member since 2024 · Bogor</div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="testi-card reveal" style="transition-delay:0.2s">
-        <div class="testi-quote">"</div>
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">Kelas Zumba-nya asik banget! Instructornya profesional dan energetik. Dengan paket Prioritas, bisa pindah cabang sesuka hati. Super worth it untuk harga segitu.</p>
-        <div class="testi-author">
-          <div class="testi-avatar">S</div>
-          <div>
-            <div class="testi-name">Sari D.</div>
-            <div class="testi-since">Member since 2021 · Depok</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card reveal" style="transition-delay:0.3s">
-        <div class="testi-quote">"</div>
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">Gym murah tapi kualitasnya premium. Design interiornya keren, bersih, dan alatnya selalu terawat. Promo bayar 3 gratis 1 itu beneran untung banget buat kita yang mau konsisten!</p>
-        <div class="testi-author">
-          <div class="testi-avatar">F</div>
-          <div>
-            <div class="testi-name">Fahmi P.</div>
-            <div class="testi-since">Member since 2023 · Tangerang</div>
-          </div>
-        </div>
-      </div>
+    </div>
+    <div class="testi-controls">
+      <button class="testi-nav-btn" id="testiPrev" onclick="testiSlide(-1)">&#8592;</button>
+      <div class="testi-dots" id="testiDots"></div>
+      <button class="testi-nav-btn" id="testiNext" onclick="testiSlide(1)">&#8594;</button>
     </div>
   </div>
 </div>
@@ -1422,21 +1667,24 @@
 </footer>
 
 <script>
-// CURSOR
+// CURSOR (desktop only)
 const cursor = document.getElementById('cursor');
 const follower = document.getElementById('cursorFollower');
 let mx = 0, my = 0, fx = 0, fy = 0;
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  cursor.style.transform = `translate(${mx - 6}px, ${my - 6}px)`;
-});
-function animFollower() {
-  fx += (mx - fx - 18) * 0.12;
-  fy += (my - fy - 18) * 0.12;
-  follower.style.transform = `translate(${fx}px, ${fy}px)`;
-  requestAnimationFrame(animFollower);
+const isTouchDevice = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+if (!isTouchDevice) {
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.transform = `translate(${mx - 6}px, ${my - 6}px)`;
+  });
+  function animFollower() {
+    fx += (mx - fx - 18) * 0.12;
+    fy += (my - fy - 18) * 0.12;
+    follower.style.transform = `translate(${fx}px, ${fy}px)`;
+    requestAnimationFrame(animFollower);
+  }
+  animFollower();
 }
-animFollower();
 
 // NAV SCROLL
 const navbar = document.getElementById('navbar');
@@ -1463,7 +1711,6 @@ const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-righ
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
-      const delay = entry.target.style.transitionDelay || '0s';
       entry.target.classList.add('visible');
       observer.unobserve(entry.target);
     }
@@ -1507,6 +1754,66 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   });
 });
+
+// ABOUT BOX SLIDESHOW
+let aboutIdx = 0;
+const aboutSlides = document.querySelectorAll('#aboutSlides .about-box-slide');
+const aboutDotEls = document.querySelectorAll('#aboutDots .slide-dot');
+function goToSlide(n) {
+  aboutSlides[aboutIdx].classList.remove('active');
+  aboutDotEls[aboutIdx].classList.remove('active');
+  aboutIdx = n;
+  aboutSlides[aboutIdx].classList.add('active');
+  aboutDotEls[aboutIdx].classList.add('active');
+}
+setInterval(() => { goToSlide((aboutIdx + 1) % aboutSlides.length); }, 3500);
+
+// TESTIMONIAL CAROUSEL
+const track = document.getElementById('testiTrack');
+const dotsContainer = document.getElementById('testiDots');
+const cards = track ? track.querySelectorAll('.testi-card') : [];
+let testiIdx = 0;
+let testiPerView = window.innerWidth <= 900 ? 1 : window.innerWidth <= 1200 ? 2 : 3;
+const testiTotal = cards.length;
+let autoplayTimer;
+
+function buildDots() {
+  dotsContainer.innerHTML = '';
+  const totalPages = Math.ceil(testiTotal / testiPerView);
+  for (let i = 0; i < totalPages; i++) {
+    const d = document.createElement('div');
+    d.className = 'testi-dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => { testiGo(i); resetAutoplay(); };
+    dotsContainer.appendChild(d);
+  }
+}
+
+function testiGo(page) {
+  const totalPages = Math.ceil(testiTotal / testiPerView);
+  testiIdx = Math.max(0, Math.min(page, totalPages - 1));
+  const cardW = cards[0].offsetWidth + 3;
+  track.style.transform = `translateX(-${testiIdx * testiPerView * cardW}px)`;
+  dotsContainer.querySelectorAll('.testi-dot').forEach((d, i) => d.classList.toggle('active', i === testiIdx));
+}
+
+function testiSlide(dir) {
+  const totalPages = Math.ceil(testiTotal / testiPerView);
+  testiGo((testiIdx + dir + totalPages) % totalPages);
+  resetAutoplay();
+}
+
+function resetAutoplay() {
+  clearInterval(autoplayTimer);
+  autoplayTimer = setInterval(() => { testiSlide(1); }, 4500);
+}
+
+window.addEventListener('resize', () => {
+  const newPerView = window.innerWidth <= 900 ? 1 : window.innerWidth <= 1200 ? 2 : 3;
+  if (newPerView !== testiPerView) { testiPerView = newPerView; testiIdx = 0; buildDots(); testiGo(0); }
+});
+
+buildDots();
+resetAutoplay();
 </script>
 </body>
 </html>
