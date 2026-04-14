@@ -2,1124 +2,80 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Duo Shine Fitness — Gym terbaik Jabodetabek. 40+ cabang, kelas gratis, harga mulai Rp 200.000/bulan.">
 <title>Duo Shine Fitness — Gym Terbaik Jabodetabek</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-  :root {
-    --yellow: #FFE600;
-    --yellow-dark: #E6CF00;
-    --black: #080808;
-    --dark: #0f0f0f;
-    --dark2: #161616;
-    --dark3: #1e1e1e;
-    --white: #f5f5f0;
-    --gray: #888;
-    --font-display: 'Bebas Neue', sans-serif;
-    --font-head: 'Barlow Condensed', sans-serif;
-    --font-body: 'Barlow', sans-serif;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: var(--font-body);
-    overflow-x: hidden;
-    cursor: default;
-  }
-
-  /* SCROLLBAR */
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: var(--black); }
-  ::-webkit-scrollbar-thumb { background: var(--yellow); border-radius: 2px; }
-
-  /* CUSTOM CURSOR */
-  .cursor {
-    width: 12px; height: 12px;
-    background: var(--yellow);
-    border-radius: 50%;
-    position: fixed; top: 0; left: 0;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.1s ease;
-    mix-blend-mode: difference;
-  }
-  .cursor-follower {
-    width: 36px; height: 36px;
-    border: 1px solid rgba(255,230,0,0.4);
-    border-radius: 50%;
-    position: fixed; top: 0; left: 0;
-    pointer-events: none;
-    z-index: 9998;
-    transition: transform 0.25s ease, width 0.2s, height 0.2s;
-  }
-  @media (hover: none), (pointer: coarse) {
-    .cursor, .cursor-follower { display: none !important; }
-  }
-
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; width: 100%;
-    z-index: 1000;
-    padding: 18px 40px;
-    display: flex; align-items: center; justify-content: space-between;
-    transition: background 0.4s, padding 0.4s;
-  }
-  nav.scrolled {
-    background: rgba(8,8,8,0.95);
-    backdrop-filter: blur(12px);
-    padding: 12px 40px;
-    border-bottom: 1px solid rgba(255,230,0,0.1);
-  }
-  .nav-logo {
-    display: flex; align-items: center; gap: 10px;
-  }
-  .nav-logo .logo-box {
-    background: var(--yellow);
-    padding: 6px 12px;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .nav-logo .logo-text {
-    font-family: var(--font-display);
-    font-size: 20px; letter-spacing: 0.05em;
-    line-height: 1;
-    color: var(--black);
-  }
-  .nav-logo .logo-sub {
-    font-family: var(--font-head);
-    font-size: 13px; letter-spacing: 0.3em;
-    color: var(--white);
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-  .nav-links {
-    display: flex; gap: 36px; list-style: none;
-  }
-  .nav-links a {
-    font-family: var(--font-head);
-    font-size: 13px; letter-spacing: 0.15em;
-    color: rgba(245,245,240,0.7);
-    text-decoration: none;
-    text-transform: uppercase;
-    font-weight: 600;
-    transition: color 0.2s;
-    position: relative;
-  }
-  .nav-links a::after {
-    content: '';
-    position: absolute; bottom: -3px; left: 0;
-    width: 0; height: 1px;
-    background: var(--yellow);
-    transition: width 0.3s;
-  }
-  .nav-links a:hover { color: var(--yellow); }
-  .nav-links a:hover::after { width: 100%; }
-  .nav-cta {
-    background: var(--yellow);
-    color: var(--black) !important;
-    padding: 10px 24px;
-    font-family: var(--font-head) !important;
-    font-weight: 900 !important;
-    font-size: 13px !important;
-    letter-spacing: 0.15em !important;
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: background 0.2s, transform 0.2s !important;
-    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
-  }
-  .nav-cta:hover { background: #fff !important; transform: scale(1.04) !important; }
-  .nav-cta::after { display: none !important; }
-
-  /* HAMBURGER */
-  .hamburger {
-    display: none;
-    flex-direction: column; gap: 5px;
-    cursor: pointer; padding: 4px;
-  }
-  .hamburger span {
-    display: block; width: 26px; height: 2px;
-    background: var(--white);
-    transition: transform 0.3s, opacity 0.3s;
-  }
-  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .hamburger.open span:nth-child(2) { opacity: 0; }
-  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-  /* MOBILE MENU */
-  .mobile-menu {
-    position: fixed; inset: 0;
-    background: var(--black);
-    z-index: 999;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 32px;
-    transform: translateX(100%);
-    transition: transform 0.4s cubic-bezier(0.77,0,0.175,1);
-  }
-  .mobile-menu.open { transform: translateX(0); }
-  .mobile-menu a {
-    font-family: var(--font-display);
-    font-size: 48px; letter-spacing: 0.05em;
-    color: var(--white);
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-  .mobile-menu a:hover { color: var(--yellow); }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    place-items: center;
-    position: relative;
-    overflow: hidden;
-    padding: 0 40px;
-  }
-  .hero-bg {
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 60% 50%, rgba(255,230,0,0.06) 0%, transparent 70%),
-                radial-gradient(ellipse at 20% 80%, rgba(255,230,0,0.04) 0%, transparent 60%);
-  }
-  .hero-grid {
-    position: absolute; inset: 0;
-    background-image: 
-      linear-gradient(rgba(255,230,0,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,230,0,0.03) 1px, transparent 1px);
-    background-size: 80px 80px;
-  }
-  .hero-lines {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none;
-  }
-  .hero-line {
-    position: absolute;
-    background: linear-gradient(90deg, transparent, var(--yellow), transparent);
-    height: 1px; width: 60%;
-    opacity: 0;
-    animation: lineSweep 4s ease-in-out infinite;
-  }
-  .hero-line:nth-child(1) { top: 25%; left: -10%; animation-delay: 0s; }
-  .hero-line:nth-child(2) { top: 50%; left: 20%; animation-delay: 1.5s; width: 40%; }
-  .hero-line:nth-child(3) { top: 75%; left: -5%; animation-delay: 3s; width: 50%; }
-  @keyframes lineSweep {
-    0% { opacity: 0; transform: translateX(-100%); }
-    20% { opacity: 0.4; }
-    80% { opacity: 0.2; }
-    100% { opacity: 0; transform: translateX(200%); }
-  }
-
-  .hero-content {
-    position: relative; z-index: 2;
-    max-width: 1200px; width: 100%;
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 60px; align-items: center;
-    padding-top: 100px;
-    padding-bottom: 60px;
-  }
-  .hero-left {}
-  .hero-tag {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-family: var(--font-head);
-    font-size: 11px; letter-spacing: 0.3em;
-    color: var(--yellow);
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    opacity: 0; transform: translateY(20px);
-    animation: fadeUp 0.7s ease forwards 0.3s;
-  }
-  .hero-tag::before {
-    content: '';
-    display: block; width: 30px; height: 1px;
-    background: var(--yellow);
-  }
-  .hero-h1 {
-    font-family: var(--font-display);
-    font-size: clamp(72px, 10vw, 140px);
-    line-height: 0.9;
-    letter-spacing: -0.01em;
-    color: var(--white);
-    margin-bottom: 24px;
-    opacity: 0; transform: translateY(30px);
-    animation: fadeUp 0.8s ease forwards 0.5s;
-  }
-  .hero-h1 .accent { color: var(--yellow); display: block; }
-  .hero-desc {
-    font-size: 16px; line-height: 1.7;
-    color: rgba(245,245,240,0.6);
-    max-width: 400px;
-    margin-bottom: 40px;
-    opacity: 0; transform: translateY(20px);
-    animation: fadeUp 0.7s ease forwards 0.7s;
-  }
-  .hero-btns {
-    display: flex; gap: 16px; flex-wrap: wrap;
-    opacity: 0; transform: translateY(20px);
-    animation: fadeUp 0.7s ease forwards 0.9s;
-    margin-bottom: 0;
-  }
-  .hero-left {
-    padding-bottom: 20px;
-  }
-  .btn-primary {
-    background: var(--yellow);
-    color: var(--black);
-    padding: 16px 36px;
-    font-family: var(--font-head);
-    font-weight: 900;
-    font-size: 14px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    text-decoration: none;
-    display: inline-flex; align-items: center; gap: 10px;
-    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-    transition: background 0.2s, transform 0.2s;
-  }
-  .btn-primary:hover { background: #fff; transform: translateY(-2px); }
-  .btn-outline {
-    border: 1px solid rgba(255,230,0,0.4);
-    color: var(--white);
-    padding: 16px 36px;
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    text-decoration: none;
-    display: inline-flex; align-items: center; gap: 10px;
-    transition: border-color 0.2s, color 0.2s, transform 0.2s;
-  }
-  .btn-outline:hover { border-color: var(--yellow); color: var(--yellow); transform: translateY(-2px); }
-
-  .hero-right {
-    position: relative;
-    opacity: 0; transform: translateX(40px);
-    animation: fadeLeft 0.9s ease forwards 0.6s;
-  }
-  .hero-stats-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 2px;
-  }
-  .stat-card {
-    background: var(--dark2);
-    padding: 32px 28px;
-    border: 1px solid rgba(255,255,255,0.04);
-    position: relative; overflow: hidden;
-    transition: background 0.3s, border-color 0.3s;
-  }
-  .stat-card:hover { background: var(--dark3); border-color: rgba(255,230,0,0.2); }
-  .stat-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0;
-    width: 3px; height: 0;
-    background: var(--yellow);
-    transition: height 0.4s;
-  }
-  .stat-card:hover::before { height: 100%; }
-  .stat-num {
-    font-family: var(--font-display);
-    font-size: 64px; line-height: 1;
-    color: var(--yellow);
-    letter-spacing: -0.02em;
-  }
-  .stat-label {
-    font-family: var(--font-head);
-    font-size: 11px; letter-spacing: 0.2em;
-    color: rgba(245,245,240,0.5);
-    text-transform: uppercase;
-    font-weight: 600;
-    margin-top: 6px;
-  }
-  .stat-card.dark-card {
-    background: var(--yellow);
-  }
-  .stat-card.dark-card .stat-num,
-  .stat-card.dark-card .stat-label { color: var(--black); }
-  .stat-card.dark-card::before { background: var(--black); }
-
-  @keyframes fadeUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeLeft {
-    to { opacity: 1; transform: translateX(0); }
-  }
-
-  /* TICKER */
-  .ticker-wrap {
-    background: var(--yellow);
-    overflow: hidden;
-    padding: 14px 0;
-    white-space: nowrap;
-    position: relative;
-    z-index: 1;
-  }
-  .ticker {
-    display: inline-flex; gap: 0;
-    animation: ticker 20s linear infinite;
-  }
-  .ticker-item {
-    font-family: var(--font-display);
-    font-size: 18px; letter-spacing: 0.08em;
-    color: var(--black);
-    padding: 0 40px;
-  }
-  .ticker-dot {
-    color: rgba(0,0,0,0.3);
-    font-size: 24px;
-    vertical-align: middle;
-  }
-  @keyframes ticker {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
-  /* SECTION BASE */
-  section { padding: 120px 40px; max-width: 1400px; margin: 0 auto; }
-  .section-full { max-width: none; padding: 120px 0; }
-
-  .section-tag {
-    font-family: var(--font-head);
-    font-size: 11px; letter-spacing: 0.35em;
-    color: var(--yellow);
-    font-weight: 700;
-    text-transform: uppercase;
-    display: flex; align-items: center; gap: 12px;
-    margin-bottom: 16px;
-  }
-  .section-tag::before {
-    content: '';
-    display: block; width: 40px; height: 1px;
-    background: var(--yellow);
-  }
-  .section-title {
-    font-family: var(--font-display);
-    font-size: clamp(48px, 6vw, 88px);
-    line-height: 0.95;
-    letter-spacing: 0.01em;
-    margin-bottom: 20px;
-  }
-  .section-title .y { color: var(--yellow); }
-
-  /* REVEAL ANIMATIONS */
-  .reveal {
-    opacity: 0; transform: translateY(50px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-left {
-    opacity: 0; transform: translateX(-50px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  .reveal-left.visible { opacity: 1; transform: translateX(0); }
-  .reveal-right {
-    opacity: 0; transform: translateX(50px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  .reveal-right.visible { opacity: 1; transform: translateX(0); }
-  .reveal-scale {
-    opacity: 0; transform: scale(0.9);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal-scale.visible { opacity: 1; transform: scale(1); }
-
-  /* ABOUT */
-  .about-inner {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 80px; align-items: center;
-  }
-  .about-text p {
-    font-size: 17px; line-height: 1.8;
-    color: rgba(245,245,240,0.65);
-    margin-bottom: 20px;
-  }
-  .about-text p strong { color: var(--yellow); font-weight: 500; }
-  .about-visual {
-    position: relative;
-  }
-  .about-box {
-    background: var(--dark2);
-    border: 1px solid rgba(255,230,0,0.15);
-    padding: 0;
-    position: relative; overflow: hidden;
-    min-height: 480px;
-  }
-  .about-box-slides {
-    position: absolute; inset: 0;
-    z-index: 0;
-  }
-  .about-box-slide {
-    position: absolute; inset: 0;
-    background-size: cover; background-position: center;
-    opacity: 0;
-    transition: opacity 1.2s ease;
-  }
-  .about-box-slide.active { opacity: 1; }
-  .about-box-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(8,8,8,0.82) 0%, rgba(8,8,8,0.55) 60%, rgba(8,8,8,0.35) 100%);
-    z-index: 1;
-  }
-  .about-box-content {
-    position: relative; z-index: 2;
-    padding: 48px;
-    height: 100%;
-  }
-  .about-box::before {
-    content: '';
-    position: absolute; top: 0; right: 0;
-    width: 80px; height: 80px;
-    background: var(--yellow);
-    clip-path: polygon(100% 0, 100% 100%, 0 0);
-    z-index: 3;
-  }
-  .about-box-slide-dots {
-    position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
-    display: flex; gap: 8px; z-index: 4;
-  }
-  .slide-dot {
-    width: 6px; height: 6px;
-    border-radius: 3px;
-    background: rgba(255,255,255,0.3);
-    transition: background 0.3s, width 0.3s;
-    cursor: pointer;
-  }
-  .slide-dot.active { background: var(--yellow); width: 20px; }
-  .about-box-title {
-    font-family: var(--font-display);
-    font-size: 52px; color: var(--yellow);
-    line-height: 1; margin-bottom: 8px;
-  }
-  .about-box-sub {
-    font-family: var(--font-head);
-    font-size: 12px; letter-spacing: 0.25em;
-    color: rgba(245,245,240,0.5);
-    text-transform: uppercase;
-    font-weight: 600;
-    margin-bottom: 32px;
-  }
-  .feature-list {
-    list-style: none; display: flex; flex-direction: column; gap: 14px;
-  }
-  .feature-list li {
-    display: flex; align-items: center; gap: 14px;
-    font-size: 15px; color: rgba(245,245,240,0.8);
-    font-family: var(--font-head);
-    font-weight: 600; letter-spacing: 0.05em;
-  }
-  .feature-list li .icon {
-    width: 32px; height: 32px;
-    background: rgba(255,230,0,0.1);
-    border: 1px solid rgba(255,230,0,0.3);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    font-size: 14px;
-  }
-
-  /* CLASSES */
-  .classes-section { background: var(--dark); padding: 120px 40px; max-width: none; }
-  .classes-inner { max-width: 1400px; margin: 0 auto; }
-  .classes-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 3px;
-    margin-top: 60px;
-  }
-  .class-card {
-    position: relative; overflow: hidden;
-    min-height: 320px;
-    cursor: default;
-    transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
-  }
-  .class-card-bg {
-    position: absolute; inset: 0;
-    background-size: cover; background-position: center;
-    transition: transform 0.6s ease;
-    filter: brightness(0.45) saturate(0.8);
-  }
-  .class-card:hover .class-card-bg {
-    transform: scale(1.08);
-    filter: brightness(0.35) saturate(1);
-  }
-  .class-card-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(8,8,8,0.95) 0%, rgba(8,8,8,0.5) 50%, rgba(8,8,8,0.15) 100%);
-    transition: background 0.4s;
-  }
-  .class-card:hover .class-card-overlay {
-    background: linear-gradient(to top, rgba(8,8,8,0.98) 0%, rgba(8,8,8,0.65) 50%, rgba(255,230,0,0.08) 100%);
-  }
-  .class-card-border {
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 2px;
-    background: transparent;
-    transition: background 0.3s;
-    z-index: 3;
-  }
-  .class-card:hover .class-card-border { background: var(--yellow); }
-  .class-card-inner {
-    position: relative; z-index: 2;
-    padding: 40px 32px;
-    height: 100%; display: flex; flex-direction: column; justify-content: flex-end;
-  }
-  .class-num {
-    font-family: var(--font-display);
-    font-size: 72px; color: rgba(255,230,0,0.15);
-    line-height: 1; margin-bottom: 16px;
-    transition: color 0.3s;
-    position: absolute; top: 20px; left: 28px;
-  }
-  .class-card:hover .class-num { color: rgba(255,230,0,0.35); }
-  .class-icon { font-size: 32px; margin-bottom: 12px; }
-  .class-name {
-    font-family: var(--font-head);
-    font-size: 22px; font-weight: 900;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    color: var(--white);
-    transition: color 0.3s;
-  }
-  .class-card:hover .class-name { color: var(--yellow); }
-  .class-desc {
-    font-size: 13px; line-height: 1.6;
-    color: rgba(245,245,240,0.55);
-    max-height: 0; overflow: hidden;
-    transition: max-height 0.4s ease, opacity 0.4s;
-    opacity: 0;
-  }
-  .class-card:hover .class-desc { max-height: 80px; opacity: 1; }
-  .class-tag {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-family: var(--font-head);
-    font-size: 10px; letter-spacing: 0.2em;
-    color: var(--yellow);
-    font-weight: 700; text-transform: uppercase;
-    margin-bottom: 8px;
-    opacity: 0; transform: translateY(8px);
-    transition: opacity 0.4s, transform 0.4s;
-  }
-  .class-card:hover .class-tag { opacity: 1; transform: translateY(0); }
-  .class-tag::before { content: ''; display: block; width: 20px; height: 1px; background: var(--yellow); }
-
-  /* PRICING */
-  .pricing-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 2px; margin-top: 60px;
-  }
-  .price-card {
-    background: var(--dark2);
-    padding: 52px 40px;
-    border: 1px solid rgba(255,255,255,0.04);
-    position: relative; overflow: hidden;
-    transition: transform 0.3s;
-  }
-  .price-card:hover { transform: translateY(-6px); }
-  .price-card.featured {
-    background: var(--yellow);
-    border-color: var(--yellow);
-  }
-  .price-badge {
-    position: absolute; top: 24px; right: 24px;
-    background: var(--black);
-    color: var(--yellow);
-    font-family: var(--font-head);
-    font-size: 10px; letter-spacing: 0.2em;
-    font-weight: 700; text-transform: uppercase;
-    padding: 4px 10px;
-  }
-  .price-card.featured .price-badge {
-    background: var(--black);
-    color: var(--yellow);
-  }
-  .price-type {
-    font-family: var(--font-head);
-    font-size: 12px; letter-spacing: 0.3em;
-    color: rgba(245,245,240,0.4);
-    text-transform: uppercase; font-weight: 700;
-    margin-bottom: 12px;
-  }
-  .price-card.featured .price-type { color: rgba(0,0,0,0.6); }
-  .price-amount {
-    font-family: var(--font-display);
-    font-size: 72px; line-height: 1;
-    color: var(--yellow);
-    letter-spacing: -0.02em;
-    margin-bottom: 4px;
-  }
-  .price-card.featured .price-amount { color: var(--black); }
-  .price-period {
-    font-size: 14px; color: rgba(245,245,240,0.5);
-    margin-bottom: 36px;
-  }
-  .price-card.featured .price-period { color: rgba(0,0,0,0.6); }
-  .price-features {
-    list-style: none; display: flex; flex-direction: column; gap: 12px;
-    margin-bottom: 40px;
-  }
-  .price-features li {
-    display: flex; align-items: center; gap: 10px;
-    font-size: 14px; color: rgba(245,245,240,0.7);
-  }
-  .price-card.featured .price-features li { color: rgba(0,0,0,0.8); }
-  .price-features li::before {
-    content: '✓';
-    color: var(--yellow);
-    font-weight: 700; font-size: 12px;
-  }
-  .price-card.featured .price-features li::before { color: var(--black); }
-  .promo-tag {
-    display: inline-block;
-    background: rgba(255,230,0,0.1);
-    border: 1px solid rgba(255,230,0,0.3);
-    color: var(--yellow);
-    font-family: var(--font-head);
-    font-size: 11px; letter-spacing: 0.15em;
-    font-weight: 700; text-transform: uppercase;
-    padding: 6px 14px; margin-bottom: 40px;
-  }
-  .price-card.featured .promo-tag {
-    background: rgba(0,0,0,0.1);
-    border-color: rgba(0,0,0,0.3);
-    color: var(--black);
-  }
-  .price-btn {
-    display: block; text-align: center;
-    padding: 16px;
-    font-family: var(--font-head);
-    font-weight: 900; font-size: 13px;
-    letter-spacing: 0.15em; text-transform: uppercase;
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-  .price-card:not(.featured) .price-btn {
-    border: 1px solid rgba(255,230,0,0.4);
-    color: var(--yellow);
-  }
-  .price-card:not(.featured) .price-btn:hover {
-    background: var(--yellow); color: var(--black);
-  }
-  .price-card.featured .price-btn {
-    background: var(--black); color: var(--yellow);
-  }
-  .price-card.featured .price-btn:hover {
-    background: rgba(0,0,0,0.85);
-  }
-
-  /* BRANCHES */
-  .branches-section { background: var(--black); }
-  .branches-header {
-    display: flex; align-items: flex-end; justify-content: space-between;
-    margin-bottom: 60px; flex-wrap: wrap; gap: 20px;
-  }
-  .branches-grid {
-    display: grid; grid-template-columns: repeat(5, 1fr);
-    gap: 2px;
-  }
-  .branch-card {
-    background: var(--dark2);
-    padding: 28px 24px;
-    border-left: 2px solid transparent;
-    transition: border-color 0.3s, background 0.3s;
-    position: relative;
-  }
-  .branch-card:hover { border-color: var(--yellow); background: var(--dark3); }
-  .branch-city {
-    font-family: var(--font-head);
-    font-size: 11px; letter-spacing: 0.25em;
-    color: var(--yellow);
-    text-transform: uppercase; font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .branch-name {
-    font-family: var(--font-head);
-    font-size: 15px; font-weight: 700;
-    margin-bottom: 6px;
-    color: var(--white);
-  }
-  .branch-addr {
-    font-size: 12px; line-height: 1.5;
-    color: rgba(245,245,240,0.45);
-  }
-
-  /* PROMO BANNER */
-  .promo-banner {
-    background: var(--yellow);
-    padding: 80px 40px;
-    text-align: center;
-  }
-  .promo-inner { max-width: 900px; margin: 0 auto; }
-  .promo-title {
-    font-family: var(--font-display);
-    font-size: clamp(52px, 8vw, 110px);
-    line-height: 0.9;
-    color: var(--black);
-    margin-bottom: 24px;
-  }
-  .promo-sub {
-    font-family: var(--font-head);
-    font-size: 18px; letter-spacing: 0.1em;
-    color: rgba(0,0,0,0.65);
-    margin-bottom: 40px;
-    font-weight: 600;
-  }
-  .promo-btn {
-    display: inline-flex; align-items: center; gap: 12px;
-    background: var(--black);
-    color: var(--yellow);
-    padding: 20px 48px;
-    font-family: var(--font-head);
-    font-weight: 900; font-size: 15px;
-    letter-spacing: 0.15em; text-transform: uppercase;
-    text-decoration: none;
-    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
-    transition: background 0.2s, transform 0.2s;
-  }
-  .promo-btn:hover { background: #111; transform: scale(1.03); }
-
-  /* TESTIMONIALS */
-  .testi-section { background: var(--dark); padding: 120px 40px; max-width: none; }
-  .testi-inner { max-width: 1400px; margin: 0 auto; }
-  .testi-carousel-wrap {
-    position: relative; margin-top: 60px; overflow: hidden;
-  }
-  .testi-carousel-track {
-    display: flex;
-    gap: 3px;
-    transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
-    will-change: transform;
-  }
-  .testi-card {
-    background: var(--dark2);
-    padding: 40px;
-    border-bottom: 2px solid transparent;
-    transition: border-color 0.3s, background 0.3s;
-    position: relative;
-    flex: 0 0 calc(33.333% - 2px);
-    min-width: calc(33.333% - 2px);
-    box-sizing: border-box;
-  }
-  .testi-card:hover { border-color: var(--yellow); background: var(--dark3); }
-  .testi-quote {
-    font-family: var(--font-display);
-    font-size: 80px; line-height: 0.6;
-    color: rgba(255,230,0,0.15);
-    margin-bottom: 16px;
-  }
-  .testi-text {
-    font-size: 15px; line-height: 1.75;
-    color: rgba(245,245,240,0.7);
-    margin-bottom: 28px;
-    font-style: italic;
-  }
-  .testi-author {
-    display: flex; align-items: center; gap: 14px;
-  }
-  .testi-avatar {
-    width: 44px; height: 44px;
-    background: var(--yellow);
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-display);
-    font-size: 20px; color: var(--black);
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    flex-shrink: 0;
-  }
-  .testi-name {
-    font-family: var(--font-head);
-    font-weight: 700; font-size: 14px;
-    letter-spacing: 0.05em;
-  }
-  .testi-since {
-    font-size: 12px; color: rgba(245,245,240,0.4);
-    letter-spacing: 0.1em;
-  }
-  .testi-stars { color: var(--yellow); font-size: 13px; letter-spacing: 2px; margin-bottom: 12px; }
-  .testi-controls {
-    display: flex; align-items: center; justify-content: center;
-    gap: 16px; margin-top: 40px;
-  }
-  .testi-dots {
-    display: flex; gap: 8px; align-items: center;
-  }
-  .testi-dot {
-    width: 6px; height: 6px; border-radius: 3px;
-    background: rgba(255,255,255,0.2);
-    transition: background 0.3s, width 0.3s;
-    cursor: pointer;
-  }
-  .testi-dot.active { background: var(--yellow); width: 24px; }
-  .testi-nav-btn {
-    width: 44px; height: 44px;
-    border: 1px solid rgba(255,230,0,0.3);
-    background: transparent;
-    color: var(--yellow);
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    transition: background 0.2s, border-color 0.2s;
-    font-size: 18px;
-  }
-  .testi-nav-btn:hover { background: rgba(255,230,0,0.1); border-color: var(--yellow); }
-  @media (max-width: 900px) {
-    .testi-card { flex: 0 0 calc(100% - 2px); min-width: calc(100% - 2px); }
-  }
-  @media (min-width: 901px) and (max-width: 1200px) {
-    .testi-card { flex: 0 0 calc(50% - 2px); min-width: calc(50% - 2px); }
-  }
-
-  /* CTA SECTION */
-  .cta-section {
-    background: var(--black);
-    padding: 120px 40px;
-    text-align: center;
-    position: relative; overflow: hidden;
-  }
-  .cta-section::before {
-    content: 'JOIN NOW';
-    position: absolute; bottom: -20px; left: 50%;
-    transform: translateX(-50%);
-    font-family: var(--font-display);
-    font-size: 20vw;
-    color: rgba(255,230,0,0.03);
-    white-space: nowrap;
-    pointer-events: none;
-  }
-  .cta-inner { max-width: 700px; margin: 0 auto; position: relative; z-index: 1; }
-  .cta-title {
-    font-family: var(--font-display);
-    font-size: clamp(52px, 7vw, 100px);
-    line-height: 0.95;
-    margin-bottom: 24px;
-  }
-  .cta-sub {
-    font-size: 17px; line-height: 1.7;
-    color: rgba(245,245,240,0.55);
-    margin-bottom: 48px;
-  }
-  .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-  .wa-btn {
-    display: inline-flex; align-items: center; gap: 12px;
-    background: #25D366;
-    color: #fff;
-    padding: 18px 40px;
-    font-family: var(--font-head);
-    font-weight: 900; font-size: 14px;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    text-decoration: none;
-    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-    transition: all 0.2s;
-  }
-  .wa-btn:hover { background: #1ebe5a; transform: translateY(-2px); }
-  .wa-icon { font-size: 20px; }
-
-  /* FOOTER */
-  footer {
-    background: var(--dark);
-    border-top: 1px solid rgba(255,230,0,0.1);
-    padding: 60px 40px 30px;
-  }
-  .footer-inner {
-    max-width: 1400px; margin: 0 auto;
-    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 60px; margin-bottom: 50px;
-  }
-  .footer-logo-box {
-    background: var(--yellow);
-    padding: 14px 22px;
-    display: inline-block;
-    margin-bottom: 20px;
-  }
-  .footer-logo-text {
-    font-family: var(--font-display);
-    font-size: 26px; color: var(--black);
-    letter-spacing: 0.05em; line-height: 1;
-  }
-  .footer-logo-sub {
-    font-family: var(--font-head);
-    font-size: 10px; letter-spacing: 0.35em;
-    color: rgba(0,0,0,0.7); font-weight: 700;
-    text-transform: uppercase; margin-top: 2px;
-  }
-  .footer-tagline {
-    font-size: 15px; line-height: 1.7;
-    color: rgba(245,245,240,0.5);
-    margin-bottom: 20px; max-width: 280px;
-  }
-  .footer-contact a {
-    display: flex; align-items: center; gap: 10px;
-    color: var(--yellow);
-    font-family: var(--font-head);
-    font-weight: 700; font-size: 15px;
-    text-decoration: none;
-    letter-spacing: 0.05em;
-    transition: opacity 0.2s;
-  }
-  .footer-contact a:hover { opacity: 0.8; }
-  .footer-col-title {
-    font-family: var(--font-head);
-    font-size: 11px; letter-spacing: 0.3em;
-    color: rgba(245,245,240,0.35);
-    text-transform: uppercase; font-weight: 700;
-    margin-bottom: 20px;
-  }
-  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .footer-links li a {
-    color: rgba(245,245,240,0.6);
-    text-decoration: none; font-size: 14px;
-    transition: color 0.2s;
-  }
-  .footer-links li a:hover { color: var(--yellow); }
-  .footer-bottom {
-    max-width: 1400px; margin: 0 auto;
-    display: flex; justify-content: space-between; align-items: center;
-    padding-top: 30px;
-    border-top: 1px solid rgba(255,255,255,0.06);
-    flex-wrap: wrap; gap: 14px;
-  }
-  .footer-bottom p {
-    font-size: 13px; color: rgba(245,245,240,0.3);
-  }
-  .footer-bottom .y { color: var(--yellow); }
-  .social-links { display: flex; gap: 14px; }
-  .social-links a {
-    width: 36px; height: 36px;
-    border: 1px solid rgba(255,255,255,0.1);
-    display: flex; align-items: center; justify-content: center;
-    color: rgba(245,245,240,0.5);
-    text-decoration: none; font-size: 14px;
-    transition: border-color 0.2s, color 0.2s;
-  }
-  .social-links a:hover { border-color: var(--yellow); color: var(--yellow); }
-
-  /* FLOATING WA */
-  .float-wa {
-    position: fixed; bottom: 32px; right: 32px;
-    z-index: 1000;
-    width: 60px; height: 60px;
-    background: #25D366;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    color: #fff; font-size: 28px;
-    text-decoration: none;
-    box-shadow: 0 8px 32px rgba(37,211,102,0.4);
-    transition: transform 0.2s, box-shadow 0.2s;
-    animation: waPulse 2.5s ease-in-out infinite;
-  }
-  .float-wa:hover { transform: scale(1.1); box-shadow: 0 12px 40px rgba(37,211,102,0.6); }
-  @keyframes waPulse {
-    0%, 100% { box-shadow: 0 8px 32px rgba(37,211,102,0.4); }
-    50% { box-shadow: 0 8px 48px rgba(37,211,102,0.7), 0 0 0 10px rgba(37,211,102,0.1); }
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 1200px) {
-    .branches-grid { grid-template-columns: repeat(3, 1fr); }
-    .classes-grid { grid-template-columns: repeat(2, 1fr); }
-    .footer-inner { grid-template-columns: 1fr 1fr; gap: 40px; }
-  }
-  @media (max-width: 900px) {
-    nav { padding: 16px 24px; }
-    nav.scrolled { padding: 12px 24px; }
-    .nav-links, .nav-cta { display: none; }
-    .hamburger { display: flex; }
-    .hero { padding: 0 24px; }
-    .hero-content { grid-template-columns: 1fr; gap: 40px; padding-top: 100px; }
-    .hero-stats-grid { grid-template-columns: 1fr 1fr; }
-    section { padding: 80px 24px; }
-    .section-full, .classes-section, .testi-section { padding: 80px 24px; }
-    .about-inner { grid-template-columns: 1fr; gap: 40px; }
-    .pricing-grid { grid-template-columns: 1fr; gap: 2px; }
-    .branches-grid { grid-template-columns: repeat(2, 1fr); }
-    .testi-carousel-wrap { overflow: hidden; }
-    .testi-card { flex: 0 0 100%; min-width: 100%; }
-    .footer-inner { grid-template-columns: 1fr; gap: 32px; }
-    .footer-bottom { flex-direction: column; align-items: flex-start; }
-    .cta-section { padding: 80px 24px; }
-    .promo-banner { padding: 60px 24px; }
-    footer { padding: 50px 24px 24px; }
-  }
-  @media (max-width: 600px) {
-    .hero-stats-grid { grid-template-columns: 1fr; }
-    .classes-grid { grid-template-columns: 1fr; }
-    .branches-grid { grid-template-columns: 1fr; }
-    .hero-btns { flex-direction: column; }
-    .cta-btns { flex-direction: column; align-items: center; }
-    .stat-num { font-size: 48px; }
-    .float-wa { bottom: 20px; right: 20px; }
-  }
-
-  /* COUNTER ANIMATION */
-  .count { display: inline-block; }
-
-  /* NOISE OVERLAY */
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    opacity: 0.018;
-    pointer-events: none;
-    z-index: 9997;
-  }
-</style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-ds="v1">
 
-<!-- CURSOR -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-follower" id="cursorFollower"></div>
+<!-- LOADER -->
+<div id="ds-loader">
+  <div class="loader-logo">DS FITNESS</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
 
-<!-- FLOATING WA -->
-<a href="https://wa.me/6289502384651" class="float-wa" target="_blank" rel="noopener" title="Chat WhatsApp">
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+<!-- CURSOR (desktop) -->
+<div class="ds-cursor" id="dsCursor"></div>
+<div class="ds-cursor-ring" id="dsCursorRing"></div>
+
+<!-- FLOAT WA -->
+<a href="https://wa.me/6289502384651" class="float-wa" target="_blank" rel="noopener" title="Chat WhatsApp" aria-label="Chat WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
 <!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#tentang" onclick="closeMobile()">Tentang</a>
-  <a href="#kelas" onclick="closeMobile()">Kelas</a>
-  <a href="#harga" onclick="closeMobile()">Harga</a>
-  <a href="#cabang" onclick="closeMobile()">Cabang</a>
-  <a href="https://wa.me/6289502384651" target="_blank" style="color:var(--yellow)">Join Now</a>
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a href="#tentang" data-label="Tentang" onclick="closeMobile()">Tentang</a>
+  <a href="#kelas" data-label="Kelas" onclick="closeMobile()">Kelas</a>
+  <a href="#harga" data-label="Harga" onclick="closeMobile()">Harga</a>
+  <a href="#cabang" data-label="Cabang" onclick="closeMobile()">Cabang</a>
+  <a href="https://wa.me/6289502384651" target="_blank" data-label="Join Now" style="color:var(--y)" onclick="closeMobile()">Join Now</a>
+  <span class="mm-sub">© 2024 Duo Shine Fitness</span>
 </div>
 
 <!-- NAV -->
-<nav id="navbar">
-  <div class="nav-logo">
+<nav id="navbar" role="navigation" aria-label="Menu Utama">
+  <a href="#hero" class="nav-logo" aria-label="Duo Shine Fitness Home">
     <div class="logo-box">
-      <div>
-        <div class="logo-text">DUO SHINE</div>
-        <div style="font-family:var(--font-head);font-size:8px;letter-spacing:0.35em;color:rgba(0,0,0,0.7);font-weight:700;text-transform:uppercase;text-align:center;">FITNESS</div>
-      </div>
+      <div class="logo-text">DUO SHINE</div>
+      <div class="logo-fitness">FITNESS</div>
     </div>
-  </div>
-  <ul class="nav-links">
-    <li><a href="#tentang">Tentang</a></li>
-    <li><a href="#kelas">Kelas</a></li>
-    <li><a href="#harga">Harga</a></li>
-    <li><a href="#cabang">Cabang</a></li>
-    <li><a href="https://wa.me/6289502384651" class="nav-cta" target="_blank">Join Now</a></li>
+    <span class="logo-sub">EST. 2007</span>
+  </a>
+  <ul class="nav-links" role="menubar">
+    <li role="none"><a href="#tentang" role="menuitem">Tentang</a></li>
+    <li role="none"><a href="#kelas" role="menuitem">Kelas</a></li>
+    <li role="none"><a href="#harga" role="menuitem">Harga</a></li>
+    <li role="none"><a href="#cabang" role="menuitem">Cabang</a></li>
+    <li role="none"><a href="https://wa.me/6289502384651" class="nav-cta" target="_blank" rel="noopener" role="menuitem">Join Now</a></li>
   </ul>
-  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Buka menu" aria-expanded="false">
     <span></span><span></span><span></span>
-  </div>
+  </button>
 </nav>
 
 <!-- HERO -->
-<section class="hero" id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-lines">
-    <div class="hero-line"></div>
-    <div class="hero-line"></div>
-    <div class="hero-line"></div>
+<section class="hero" id="hero" aria-label="Hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-accent" aria-hidden="true"></div>
+  <div class="hero-scanline" aria-hidden="true"></div>
+  <div class="hero-sweep" aria-hidden="true">
+    <div class="hero-sweep-line"></div>
+    <div class="hero-sweep-line"></div>
+    <div class="hero-sweep-line"></div>
   </div>
+
   <div class="hero-content">
     <div class="hero-left">
-      <div class="hero-tag">Est. 2007 · Jabodetabek</div>
+      <div class="hero-tag">
+        <span class="hero-tag-dot"></span>
+        Est. 2007 &nbsp;·&nbsp; Jabodetabek
+      </div>
       <h1 class="hero-h1">
         UNLEASH
         <span class="accent">YOUR</span>
@@ -1129,16 +85,17 @@
         Gym terjangkau dengan fasilitas kelas dunia. 40+ cabang se-Jabodetabek, kelas gratis, alat premium — semua dalam satu membership.
       </p>
       <div class="hero-btns">
-        <a href="https://wa.me/6289502384651" class="btn-primary" target="_blank">
+        <a href="https://wa.me/6289502384651" class="btn-primary" target="_blank" rel="noopener">
           Daftar Sekarang
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
         <a href="#kelas" class="btn-outline">Lihat Kelas</a>
       </div>
     </div>
-    <div class="hero-right">
+
+    <div class="hero-right" aria-label="Statistik Duo Shine">
       <div class="hero-stats-grid">
-        <div class="stat-card dark-card">
+        <div class="stat-card featured-stat">
           <div class="stat-num"><span class="count" data-target="40">0</span>+</div>
           <div class="stat-label">Cabang Aktif</div>
         </div>
@@ -1151,7 +108,7 @@
           <div class="stat-label">Jenis Kelas Gratis</div>
         </div>
         <div class="stat-card">
-          <div class="stat-num">200<span style="font-size:32px">rb</span></div>
+          <div class="stat-num">200<span style="font-family:var(--ff-h);font-size:clamp(18px,3vw,28px);font-weight:700;letter-spacing:0">rb</span></div>
           <div class="stat-label">Mulai dari / bulan</div>
         </div>
       </div>
@@ -1159,8 +116,8 @@
   </div>
 </section>
 
-<!-- TICKER -->
-<div class="ticker-wrap">
+<!-- TICKER ROW 1 -->
+<div class="ticker-wrap" aria-hidden="true">
   <div class="ticker">
     <span class="ticker-item">FITNESS <span class="ticker-dot">◆</span></span>
     <span class="ticker-item">ZUMBA <span class="ticker-dot">◆</span></span>
@@ -1186,171 +143,133 @@
   </div>
 </div>
 
+<!-- TICKER ROW 2 (reverse) -->
+<div class="ticker-wrap-2" aria-hidden="true">
+  <div class="ticker rev">
+    <span class="ticker-item">40+ CABANG <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">JABODETABEK <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">MULAI 200RB/BULAN <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">FREE CLASS <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">SINCE 2007 <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">LOKER GRATIS <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">PERSONAL TRAINER <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">3 LANTAI FITNESS <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">BAYAR 3 GRATIS 1 <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">PRIORITAS ALL ACCESS <span class="ticker-dot">◆</span></span>
+    <!-- duplicate -->
+    <span class="ticker-item">40+ CABANG <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">JABODETABEK <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">MULAI 200RB/BULAN <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">FREE CLASS <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">SINCE 2007 <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">LOKER GRATIS <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">PERSONAL TRAINER <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">3 LANTAI FITNESS <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">BAYAR 3 GRATIS 1 <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">PRIORITAS ALL ACCESS <span class="ticker-dot">◆</span></span>
+  </div>
+</div>
+
 <!-- ABOUT -->
-<section id="tentang">
+<section id="tentang" aria-label="Tentang Kami">
   <div class="about-inner">
     <div class="about-text reveal-left">
       <div class="section-tag">Tentang Kami</div>
       <h2 class="section-title">GYM KELAS<br><span class="y">DUNIA,</span><br>HARGA MERAKYAT</h2>
       <p>Duo Shine Fitness berdiri sejak <strong>2007</strong> dengan visi memberikan akses gym berkualitas tinggi kepada semua kalangan. Design interior modern seperti fitness premium di mall, dengan harga yang bisa dijangkau semua orang.</p>
-      <p>Dengan lebih dari <strong>40 outlet aktif se-Jabodetabek</strong>, kami terus berkembang dan meningkatkan standar layanan. Setiap cabang dilengkapi alat fitness lengkap, kamar mandi bersih, dan loker gratis untuk kenyamanan maksimal.</p>
+      <p>Dengan lebih dari <strong>40 outlet aktif se-Jabodetabek</strong>, kami terus berkembang dan meningkatkan standar layanan. Setiap cabang dilengkapi alat fitness lengkap, kamar mandi bersih, dan loker gratis.</p>
       <p>Didirikan oleh <strong>Robby Shine</strong>, gym ini hadir sebagai solusi kebugaran yang menjangkau semua segmen — dari remaja hingga lansia, pria maupun wanita.</p>
     </div>
     <div class="about-visual reveal-right">
       <div class="about-box">
-        <div class="about-box-slides" id="aboutSlides">
-          <div class="about-box-slide active" style="background-image:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80')"></div>
-          <div class="about-box-slide" style="background-image:url('https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&q=80')"></div>
-          <div class="about-box-slide" style="background-image:url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80')"></div>
-          <div class="about-box-slide" style="background-image:url('https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=800&q=80')"></div>
-          <div class="about-box-slide" style="background-image:url('https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=800&q=80')"></div>
-        </div>
-        <div class="about-box-overlay"></div>
-        <div class="about-box-content">
-          <div class="about-box-title">WHY<br>SHINE?</div>
-          <div class="about-box-sub">Keunggulan Kami</div>
-          <ul class="feature-list">
-            <li><span class="icon">🏋️</span> Alat fitness lengkap & modern</li>
-            <li><span class="icon">🌟</span> Kelas gratis (Zumba, Yoga, dll)</li>
-            <li><span class="icon">📍</span> 40+ lokasi se-Jabodetabek</li>
-            <li><span class="icon">💰</span> Harga mulai Rp 200.000/bulan</li>
-            <li><span class="icon">🔓</span> Fitness 3 lantai tanpa batas</li>
-            <li><span class="icon">🚿</span> Kamar mandi & loker bersih</li>
-            <li><span class="icon">👨‍🏫</span> Personal Trainer profesional</li>
-            <li><span class="icon">⭐</span> Member Prioritas akses semua cabang</li>
-          </ul>
-        </div>
-        <div class="about-box-slide-dots" id="aboutDots">
-          <div class="slide-dot active" onclick="goToSlide(0)"></div>
-          <div class="slide-dot" onclick="goToSlide(1)"></div>
-          <div class="slide-dot" onclick="goToSlide(2)"></div>
-          <div class="slide-dot" onclick="goToSlide(3)"></div>
-          <div class="slide-dot" onclick="goToSlide(4)"></div>
-        </div>
+        <div class="about-box-title">WHY<br>SHINE?</div>
+        <div class="about-box-sub">Keunggulan Kami</div>
+        <ul class="feature-list">
+          <li><span class="icon">🏋️</span> Alat fitness lengkap & modern</li>
+          <li><span class="icon">🌟</span> Kelas gratis (Zumba, Yoga, dll)</li>
+          <li><span class="icon">📍</span> 40+ lokasi se-Jabodetabek</li>
+          <li><span class="icon">💰</span> Harga mulai Rp 200.000/bulan</li>
+          <li><span class="icon">🔓</span> Fitness 3 lantai tanpa batas</li>
+          <li><span class="icon">🚿</span> Kamar mandi & loker bersih</li>
+          <li><span class="icon">👨‍🏫</span> Personal Trainer profesional</li>
+          <li><span class="icon">⭐</span> Member Prioritas akses semua cabang</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
 <!-- CLASSES -->
-<div class="classes-section" id="kelas">
+<div class="classes-section" id="kelas" aria-label="Program Kelas">
   <div class="classes-inner">
     <div class="reveal">
       <div class="section-tag">Program Kelas</div>
       <h2 class="section-title">FREE CLASS<br><span class="y">UNTUK SEMUA</span><br>MEMBER</h2>
     </div>
     <div class="classes-grid">
-      <div class="class-card reveal" style="transition-delay:0.1s">
-        <div class="class-card-bg" style="background-image:url('https://images.unsplash.com/photo-1518611012118-696072aa579a?w=700&q=80')"></div>
-        <div class="class-card-overlay"></div>
-        <div class="class-card-border"></div>
-        <div class="class-card-inner">
-          <div class="class-num">01</div>
-          <div class="class-tag">Free Class</div>
-          <div class="class-icon">💃</div>
-          <div class="class-name">Zumba</div>
-          <div class="class-desc">Dance fitness yang menyenangkan. Bakar kalori sambil bergoyang dengan musik Latin yang enerjik.</div>
-        </div>
+      <div class="class-card reveal" style="transition-delay:.08s">
+        <div class="class-num">01</div>
+        <div class="class-icon">💃</div>
+        <div class="class-name">Zumba</div>
+        <div class="class-desc">Dance fitness yang menyenangkan. Bakar kalori sambil bergoyang dengan musik Latin yang enerjik.</div>
       </div>
-      <div class="class-card reveal" style="transition-delay:0.15s">
-        <div class="class-card-bg" style="background-image:url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=700&q=80')"></div>
-        <div class="class-card-overlay"></div>
-        <div class="class-card-border"></div>
-        <div class="class-card-inner">
-          <div class="class-num">02</div>
-          <div class="class-tag">Free Class</div>
-          <div class="class-icon">🏃</div>
-          <div class="class-name">Aerobic</div>
-          <div class="class-desc">Gerakan kardio dinamis untuk meningkatkan stamina, kekuatan jantung, dan membakar lemak optimal.</div>
-        </div>
+      <div class="class-card reveal" style="transition-delay:.14s">
+        <div class="class-num">02</div>
+        <div class="class-icon">🏃</div>
+        <div class="class-name">Aerobic</div>
+        <div class="class-desc">Gerakan kardio dinamis untuk meningkatkan stamina, kekuatan jantung, dan membakar lemak optimal.</div>
       </div>
-      <div class="class-card reveal" style="transition-delay:0.2s">
-        <div class="class-card-bg" style="background-image:url('https://images.unsplash.com/photo-1555597673-b21d5c935865?w=700&q=80')"></div>
-        <div class="class-card-overlay"></div>
-        <div class="class-card-border"></div>
-        <div class="class-card-inner">
-          <div class="class-num">03</div>
-          <div class="class-tag">Free Class</div>
-          <div class="class-icon">🥊</div>
-          <div class="class-name">Body Combat</div>
-          <div class="class-desc">Kombinasi teknik bela diri dalam kelas kardio intensitas tinggi yang membakar lebih banyak kalori.</div>
-        </div>
+      <div class="class-card reveal" style="transition-delay:.2s">
+        <div class="class-num">03</div>
+        <div class="class-icon">🥊</div>
+        <div class="class-name">Body Combat</div>
+        <div class="class-desc">Kombinasi teknik bela diri dalam kelas kardio intensitas tinggi yang membakar lebih banyak kalori.</div>
       </div>
-      <div class="class-card reveal" style="transition-delay:0.25s">
-        <div class="class-card-bg" style="background-image:url('https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?w=700&q=80')"></div>
-        <div class="class-card-overlay"></div>
-        <div class="class-card-border"></div>
-        <div class="class-card-inner">
-          <div class="class-num">04</div>
-          <div class="class-tag">Free Class</div>
-          <div class="class-icon">🧘</div>
-          <div class="class-name">Yoga</div>
-          <div class="class-desc">Keseimbangan tubuh dan pikiran. Tingkatkan fleksibilitas, ketenangan, dan kekuatan dari dalam.</div>
-        </div>
+      <div class="class-card reveal" style="transition-delay:.26s">
+        <div class="class-num">04</div>
+        <div class="class-icon">🧘</div>
+        <div class="class-name">Yoga</div>
+        <div class="class-desc">Keseimbangan tubuh dan pikiran. Tingkatkan fleksibilitas, ketenangan, dan kekuatan dari dalam.</div>
       </div>
-      <div class="class-card reveal" style="transition-delay:0.3s">
-        <div class="class-card-bg" style="background-image:url('https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?w=700&q=80')"></div>
-        <div class="class-card-overlay"></div>
-        <div class="class-card-border"></div>
-        <div class="class-card-inner">
-          <div class="class-num">05</div>
-          <div class="class-tag">Free Class</div>
-          <div class="class-icon">🔥</div>
-          <div class="class-name">Fat Loss Class</div>
-          <div class="class-desc">Program khusus pembakaran lemak dengan kombinasi HIIT dan latihan metabolisme tinggi.</div>
-        </div>
+      <div class="class-card reveal" style="transition-delay:.32s">
+        <div class="class-num">05</div>
+        <div class="class-icon">🔥</div>
+        <div class="class-name">Fat Loss Class</div>
+        <div class="class-desc">Program khusus pembakaran lemak dengan kombinasi HIIT dan latihan metabolisme tinggi.</div>
       </div>
-      <div class="class-card reveal" style="transition-delay:0.35s">
-        <div class="class-card-bg" style="background-image:url('https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=700&q=80')"></div>
-        <div class="class-card-overlay"></div>
-        <div class="class-card-border"></div>
-        <div class="class-card-inner">
-          <div class="class-num">06</div>
-          <div class="class-tag">Free Class</div>
-          <div class="class-icon">✨</div>
-          <div class="class-name">Shine Dance</div>
-          <div class="class-desc">Kelas dance eksklusif Duo Shine. Ekspresikan diri sambil membentuk tubuh ideal dengan gerakan yang fun.</div>
-        </div>
+      <div class="class-card reveal" style="transition-delay:.38s">
+        <div class="class-num">06</div>
+        <div class="class-icon">✨</div>
+        <div class="class-name">Shine Dance</div>
+        <div class="class-desc">Kelas dance eksklusif Duo Shine. Ekspresikan diri sambil membentuk tubuh ideal dengan gerakan yang fun.</div>
       </div>
-      <div class="class-card reveal" style="transition-delay:0.4s">
-        <div class="class-card-bg" style="background-image:url('https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=700&q=80')"></div>
-        <div class="class-card-overlay"></div>
-        <div class="class-card-border"></div>
-        <div class="class-card-inner">
-          <div class="class-num">07</div>
-          <div class="class-tag">Free Class</div>
-          <div class="class-icon">🩰</div>
-          <div class="class-name">Belly Dance</div>
-          <div class="class-desc">Seni tari perut yang memperindah postur, melatih fleksibilitas, dan membentuk otot core secara alami.</div>
-        </div>
+      <div class="class-card reveal" style="transition-delay:.44s">
+        <div class="class-num">07</div>
+        <div class="class-icon">🩰</div>
+        <div class="class-name">Belly Dance</div>
+        <div class="class-desc">Seni tari perut yang memperindah postur, melatih fleksibilitas, dan membentuk otot core secara alami.</div>
       </div>
-      <div class="class-card reveal" style="transition-delay:0.45s">
-        <div class="class-card-bg" style="background-image:url('https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=700&q=80')"></div>
-        <div class="class-card-overlay"></div>
-        <div class="class-card-border"></div>
-        <div class="class-card-inner">
-          <div class="class-num">08</div>
-          <div class="class-tag">Free Class</div>
-          <div class="class-icon">💪</div>
-          <div class="class-name">Strong Nation</div>
-          <div class="class-desc">Latihan kekuatan berbasis musik yang menantang seluruh otot tubuh dalam ritme yang memotivasi.</div>
-        </div>
+      <div class="class-card reveal" style="transition-delay:.50s">
+        <div class="class-num">08</div>
+        <div class="class-icon">💪</div>
+        <div class="class-name">Strong Nation</div>
+        <div class="class-desc">Latihan kekuatan berbasis musik yang menantang seluruh otot tubuh dalam ritme yang memotivasi.</div>
       </div>
     </div>
   </div>
 </div>
 
 <!-- PRICING -->
-<section id="harga">
+<section id="harga" aria-label="Paket Harga">
   <div class="reveal">
     <div class="section-tag">Paket Member</div>
     <h2 class="section-title">PILIH <span class="y">PAKET</span><br>TERBAIK KAMU</h2>
-    <p style="font-size:16px;color:rgba(245,245,240,0.5);margin-top:12px;max-width:520px;">Semua paket sudah termasuk akses free class. Semakin lama, semakin hemat!</p>
+    <p style="font-size:15px;color:rgba(243,243,238,.48);margin-top:12px;max-width:500px;font-family:var(--ff-b);line-height:1.7;">Semua paket sudah termasuk akses free class. Semakin lama, semakin hemat!</p>
   </div>
   <div class="pricing-grid">
-    <div class="price-card reveal" style="transition-delay:0.1s">
+    <div class="price-card reveal" style="transition-delay:.1s">
       <div class="price-type">Reguler</div>
-      <div class="price-amount">200<span style="font-size:24px">rb</span></div>
+      <div class="price-amount">200<span style="font-family:var(--ff-h);font-size:22px;font-weight:700;letter-spacing:0">rb</span></div>
       <div class="price-period">per bulan</div>
       <ul class="price-features">
         <li>Akses gym unlimited</li>
@@ -1359,12 +278,12 @@
         <li>Kamar mandi bersih</li>
         <li>Berlaku di cabang terdaftar</li>
       </ul>
-      <a href="https://wa.me/6289502384651" class="price-btn" target="_blank">Pilih Paket</a>
+      <a href="https://wa.me/6289502384651" class="price-btn" target="_blank" rel="noopener">Pilih Paket</a>
     </div>
-    <div class="price-card featured reveal" style="transition-delay:0.2s">
+    <div class="price-card featured reveal" style="transition-delay:.2s">
       <div class="price-badge">🔥 Terpopuler</div>
       <div class="price-type">Prioritas</div>
-      <div class="price-amount">225<span style="font-size:24px">rb</span></div>
+      <div class="price-amount">225<span style="font-family:var(--ff-h);font-size:22px;font-weight:700;letter-spacing:0">rb</span></div>
       <div class="price-period">per bulan</div>
       <div class="promo-tag">✦ BAYAR 3 GRATIS 1</div>
       <ul class="price-features">
@@ -1375,228 +294,173 @@
         <li>Akses SEMUA cabang Jabodetabek</li>
         <li>Prioritas antrian kelas</li>
       </ul>
-      <a href="https://wa.me/6289502384651" class="price-btn" target="_blank">Pilih Paket</a>
+      <a href="https://wa.me/6289502384651" class="price-btn" target="_blank" rel="noopener">Pilih Paket</a>
     </div>
-    <div class="price-card reveal" style="transition-delay:0.3s">
-      <div class="price-badge" style="background:var(--yellow);color:var(--black);">PT Package</div>
+    <div class="price-card reveal" style="transition-delay:.3s">
+      <div class="price-badge" style="background:var(--y);color:var(--b)">PT Package</div>
       <div class="price-type">Personal Trainer</div>
-      <div class="price-amount">850<span style="font-size:24px">rb</span></div>
+      <div class="price-amount">850<span style="font-family:var(--ff-h);font-size:22px;font-weight:700;letter-spacing:0">rb</span></div>
       <div class="price-period">16x pertemuan / bulan</div>
       <div class="promo-tag">3 Bulan = 2.4 Juta (hemat!)</div>
       <ul class="price-features">
         <li>Trainer profesional berdedikasi</li>
         <li>Program latihan personal</li>
-        <li>Diet & nutrition advice</li>
+        <li>Diet &amp; nutrition advice</li>
         <li>Progress tracking bulanan</li>
         <li>Semua benefit Prioritas</li>
       </ul>
-      <a href="https://wa.me/6289502384651" class="price-btn" target="_blank">Konsultasi Gratis</a>
+      <a href="https://wa.me/6289502384651" class="price-btn" target="_blank" rel="noopener">Konsultasi Gratis</a>
     </div>
   </div>
 </section>
 
 <!-- PROMO BANNER -->
-<div class="promo-banner">
+<div class="promo-banner" aria-label="Promo Spesial">
   <div class="promo-inner reveal-scale">
     <div class="promo-title">BAYAR 3<br>GRATIS 1</div>
     <p class="promo-sub">Daftar paket 3 bulan sekarang dan nikmati 1 bulan GRATIS!<br>Promo terbatas untuk member baru — jangan sampai kehabisan.</p>
-    <a href="https://wa.me/6289502384651" class="promo-btn" target="_blank">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <a href="https://wa.me/6289502384651" class="promo-btn" target="_blank" rel="noopener">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       Klaim Promo via WhatsApp
     </a>
   </div>
 </div>
 
 <!-- BRANCHES -->
-<section id="cabang" class="branches-section">
+<section id="cabang" class="branches-section" aria-label="Lokasi Cabang">
   <div class="branches-header reveal">
     <div>
       <div class="section-tag">Lokasi Kami</div>
       <h2 class="section-title">40+ CABANG<br><span class="y">JABODETABEK</span></h2>
     </div>
-    <p style="max-width:320px;font-size:15px;color:rgba(245,245,240,0.5);line-height:1.7;">Selalu ada cabang Duo Shine di dekat rumahmu. Member Prioritas bebas akses ke semua cabang!</p>
+    <p style="max-width:300px;font-size:14px;color:rgba(243,243,238,.48);line-height:1.75;">Selalu ada cabang Duo Shine di dekat rumahmu. Member Prioritas bebas akses ke semua cabang!</p>
   </div>
   <div class="branches-grid">
-    <div class="branch-card reveal" style="transition-delay:0.05s">
+    <div class="branch-card reveal" style="transition-delay:.04s">
       <div class="branch-city">Jakarta Barat</div>
       <div class="branch-name">Meruya</div>
       <div class="branch-addr">Jl. Taman Meruya Ilir Blok A18 No.8j</div>
     </div>
-    <div class="branch-card reveal" style="transition-delay:0.1s">
+    <div class="branch-card reveal" style="transition-delay:.08s">
       <div class="branch-city">Jakarta Pusat</div>
       <div class="branch-name">Cideng</div>
       <div class="branch-addr">Jl. Cideng Barat No.70B, Gambir</div>
     </div>
-    <div class="branch-card reveal" style="transition-delay:0.15s">
+    <div class="branch-card reveal" style="transition-delay:.12s">
       <div class="branch-city">Jakarta Selatan</div>
       <div class="branch-name">Pondok Indah</div>
       <div class="branch-addr">Area Pondok Indah, Jakarta Selatan</div>
     </div>
-    <div class="branch-card reveal" style="transition-delay:0.2s">
+    <div class="branch-card reveal" style="transition-delay:.16s">
       <div class="branch-city">Jakarta Utara</div>
       <div class="branch-name">Pluit</div>
       <div class="branch-addr">Jl. Pluit Karang Barat No.114</div>
     </div>
-    <div class="branch-card reveal" style="transition-delay:0.25s">
+    <div class="branch-card reveal" style="transition-delay:.20s">
       <div class="branch-city">Tangerang</div>
       <div class="branch-name">Pondok Aren</div>
-      <div class="branch-addr">Jl. Pondok Aren Raya, Ruko Pondok Aren Plaza No.7</div>
+      <div class="branch-addr">Jl. Pondok Aren Raya, Ruko No.7</div>
     </div>
-    <div class="branch-card reveal" style="transition-delay:0.3s">
+    <div class="branch-card reveal" style="transition-delay:.24s">
       <div class="branch-city">Tangerang Selatan</div>
       <div class="branch-name">Pamulang</div>
-      <div class="branch-addr">Jl. Pamulang Raya, Tangerang Selatan</div>
+      <div class="branch-addr">Jl. Pamulang Raya, Tangsel</div>
     </div>
-    <div class="branch-card reveal" style="transition-delay:0.35s">
+    <div class="branch-card reveal" style="transition-delay:.28s">
       <div class="branch-city">Depok</div>
       <div class="branch-name">Sawangan</div>
       <div class="branch-addr">Jl. Sawangan, Depok</div>
     </div>
-    <div class="branch-card reveal" style="transition-delay:0.4s">
+    <div class="branch-card reveal" style="transition-delay:.32s">
       <div class="branch-city">Depok</div>
       <div class="branch-name">Parung Bingung</div>
       <div class="branch-addr">Jl. Parung Bingung, Depok</div>
     </div>
-    <div class="branch-card reveal" style="transition-delay:0.45s">
+    <div class="branch-card reveal" style="transition-delay:.36s">
       <div class="branch-city">Bogor</div>
       <div class="branch-name">Cilendek</div>
       <div class="branch-addr">Dekat Lampu Merah Yasmin, Bogor</div>
     </div>
-    <div class="branch-card reveal" style="transition-delay:0.5s">
+    <div class="branch-card reveal" style="transition-delay:.40s">
       <div class="branch-city">Bekasi</div>
       <div class="branch-name">Bekasi Timur</div>
       <div class="branch-addr">Area Bekasi Timur, Bekasi</div>
     </div>
-    <div class="branch-card reveal" style="transition-delay:0.55s;border:1px solid rgba(255,230,0,0.2);background:var(--dark3);">
-      <div class="branch-city" style="color:rgba(245,245,240,0.4)">Dan masih banyak lagi</div>
-      <div class="branch-name" style="color:var(--yellow)">30+ Cabang Lainnya</div>
-      <div class="branch-addr">Tanyakan cabang terdekat via WhatsApp untuk lokasi lengkap</div>
+    <div class="branch-card reveal" style="transition-delay:.44s;border:1px solid rgba(255,230,0,.18);background:var(--d3);">
+      <div class="branch-city" style="color:rgba(243,243,238,.35)">Dan masih banyak lagi</div>
+      <div class="branch-name" style="color:var(--y)">30+ Cabang Lainnya</div>
+      <div class="branch-addr">Tanyakan lokasi terdekat via WhatsApp</div>
     </div>
   </div>
 </section>
 
 <!-- TESTIMONIALS -->
-<div class="testi-section">
+<div class="testi-section" aria-label="Testimoni Member">
   <div class="testi-inner">
     <div class="reveal">
       <div class="section-tag">Testimoni Member</div>
       <h2 class="section-title">APA KATA<br><span class="y">MEREKA?</span></h2>
     </div>
-    <div class="testi-carousel-wrap reveal">
-      <div class="testi-carousel-track" id="testiTrack">
-        <div class="testi-card">
-          <div class="testi-quote">"</div>
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">Udah 2 tahun jadi member Duo Shine Meruya. Alatnya lengkap banget, kelasnya gratis, dan harganya jauh lebih murah dibanding gym lain dengan kualitas serupa. Highly recommended!</p>
-          <div class="testi-author">
-            <div class="testi-avatar">R</div>
-            <div>
-              <div class="testi-name">Rizky A.</div>
-              <div class="testi-since">Member since 2022 · Jakarta Barat</div>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-quote">"</div>
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">Kelas Zumba-nya asik banget! Instructornya profesional dan energetik. Dengan paket Prioritas, bisa pindah cabang sesuka hati. Super worth it untuk harga segitu.</p>
-          <div class="testi-author">
-            <div class="testi-avatar">S</div>
-            <div>
-              <div class="testi-name">Sari D.</div>
-              <div class="testi-since">Member since 2021 · Depok</div>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-quote">"</div>
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">Gym murah tapi kualitasnya premium. Design interiornya keren, bersih, dan alatnya selalu terawat. Promo bayar 3 gratis 1 itu beneran untung banget buat kita yang mau konsisten!</p>
-          <div class="testi-author">
-            <div class="testi-avatar">F</div>
-            <div>
-              <div class="testi-name">Fahmi P.</div>
-              <div class="testi-since">Member since 2023 · Tangerang</div>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-quote">"</div>
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">Sejak ikut kelas Body Combat di Duo Shine, berat badan turun 8kg dalam 3 bulan. Trainernya supportif banget dan suasananya bikin semangat terus. Nggak nyesel daftar!</p>
-          <div class="testi-author">
-            <div class="testi-avatar">A</div>
-            <div>
-              <div class="testi-name">Anisa W.</div>
-              <div class="testi-since">Member since 2023 · Bekasi</div>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-quote">"</div>
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">Member Prioritas paling worth it sih. Bisa akses semua cabang, jadi kalau lagi di luar daerah tetap bisa gym. Lokernya bersih, kamar mandinya nyaman. 10/10 recommended!</p>
-          <div class="testi-author">
-            <div class="testi-avatar">B</div>
-            <div>
-              <div class="testi-name">Bagas M.</div>
-              <div class="testi-since">Member since 2020 · Jakarta Selatan</div>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-quote">"</div>
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">Yoga class-nya bikin tenang banget. Instructornya ramah, tempatnya nyaman, dan gratis sudah include di membership. Setelah kerja langsung cabang Pamulang, hemat waktu dan uang!</p>
-          <div class="testi-author">
-            <div class="testi-avatar">D</div>
-            <div>
-              <div class="testi-name">Dewi R.</div>
-              <div class="testi-since">Member since 2022 · Tangerang Selatan</div>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-quote">"</div>
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">Buat yang baru mau mulai gym, Duo Shine pilihan tepat. Staff-nya friendly, nggak sombong, mau bantu jelasin alat. Alatnya lengkap dan selalu dijaga kebersihannya. Lanjut terus!</p>
-          <div class="testi-author">
-            <div class="testi-avatar">H</div>
-            <div>
-              <div class="testi-name">Hendra K.</div>
-              <div class="testi-since">Member since 2024 · Bogor</div>
-            </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal" style="transition-delay:.1s">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Udah 2 tahun jadi member Duo Shine Meruya. Alatnya lengkap banget, kelasnya gratis, dan harganya jauh lebih murah dibanding gym lain dengan kualitas serupa. Highly recommended!</p>
+        <div class="testi-author">
+          <div class="testi-avatar">R</div>
+          <div>
+            <div class="testi-name">Rizky A.</div>
+            <div class="testi-since">Member since 2022 · Jakarta Barat</div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="testi-controls">
-      <button class="testi-nav-btn" id="testiPrev" onclick="testiSlide(-1)">&#8592;</button>
-      <div class="testi-dots" id="testiDots"></div>
-      <button class="testi-nav-btn" id="testiNext" onclick="testiSlide(1)">&#8594;</button>
+      <div class="testi-card reveal" style="transition-delay:.2s">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Kelas Zumba-nya asik banget! Instructornya profesional dan energetik. Dengan paket Prioritas, bisa pindah cabang sesuka hati. Super worth it untuk harga segitu.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">S</div>
+          <div>
+            <div class="testi-name">Sari D.</div>
+            <div class="testi-since">Member since 2021 · Depok</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal" style="transition-delay:.3s">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Gym murah tapi kualitasnya premium. Design interiornya keren, bersih, dan alatnya selalu terawat. Promo bayar 3 gratis 1 itu beneran untung banget buat yang mau konsisten!</p>
+        <div class="testi-author">
+          <div class="testi-avatar">F</div>
+          <div>
+            <div class="testi-name">Fahmi P.</div>
+            <div class="testi-since">Member since 2023 · Tangerang</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- CTA -->
-<div class="cta-section">
+<div class="cta-section" aria-label="Call to Action">
   <div class="cta-inner">
     <div class="reveal">
       <div class="section-tag" style="justify-content:center">Mulai Sekarang</div>
-      <h2 class="cta-title">SIAP UNTUK <span style="color:var(--yellow)">SHINE?</span></h2>
+      <h2 class="cta-title">SIAP UNTUK <span style="color:var(--y)">SHINE?</span></h2>
       <p class="cta-sub">Hubungi kami via WhatsApp sekarang dan dapatkan info promo terbaru, lokasi cabang terdekat, serta konsultasi gratis dengan trainer kami.</p>
     </div>
-    <div class="cta-btns reveal">
-      <a href="https://wa.me/6289502384651" class="wa-btn" target="_blank">
+    <div class="cta-btns reveal" style="transition-delay:.15s">
+      <a href="https://wa.me/6289502384651" class="wa-btn" target="_blank" rel="noopener">
         <span class="wa-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         </span>
         Chat 0895-0238-4651
       </a>
-      <a href="#harga" class="btn-outline" style="padding:18px 40px;">Lihat Harga</a>
+      <a href="#harga" class="btn-outline" style="padding:17px 38px;">Lihat Harga</a>
     </div>
-    <p style="margin-top:28px;font-size:13px;color:rgba(245,245,240,0.3);letter-spacing:0.05em;" class="reveal">
-      Buka setiap hari 07.30 — 22.00 WIB
+    <p style="margin-top:24px;font-family:var(--ff-m);font-size:10px;color:rgba(243,243,238,.25);letter-spacing:.15em;" class="reveal" style="transition-delay:.25s">
+      BUKA SETIAP HARI &nbsp;·&nbsp; 07.30 — 22.00 WIB
     </p>
   </div>
 </div>
@@ -1611,8 +475,8 @@
       </div>
       <p class="footer-tagline">Gym berkualitas dengan harga terjangkau. Lebih dari 40 cabang se-Jabodetabek siap melayani kebugaran Anda sejak 2007.</p>
       <div class="footer-contact">
-        <a href="https://wa.me/6289502384651" target="_blank">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <a href="https://wa.me/6289502384651" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           0895-0238-4651
         </a>
       </div>
@@ -1629,32 +493,32 @@
     <div>
       <div class="footer-col-title">Kelas</div>
       <ul class="footer-links">
-        <li><a href="#">Zumba</a></li>
-        <li><a href="#">Aerobic</a></li>
-        <li><a href="#">Body Combat</a></li>
-        <li><a href="#">Yoga</a></li>
-        <li><a href="#">Strong Nation</a></li>
-        <li><a href="#">Fat Loss Class</a></li>
+        <li><a href="#kelas">Zumba</a></li>
+        <li><a href="#kelas">Aerobic</a></li>
+        <li><a href="#kelas">Body Combat</a></li>
+        <li><a href="#kelas">Yoga</a></li>
+        <li><a href="#kelas">Strong Nation</a></li>
+        <li><a href="#kelas">Fat Loss Class</a></li>
       </ul>
     </div>
     <div>
       <div class="footer-col-title">Jam Operasional</div>
       <ul class="footer-links">
-        <li><a href="#">Senin – Jumat: 07.30 – 22.00</a></li>
+        <li><a href="#">Sen – Jum: 07.30 – 22.00</a></li>
         <li><a href="#">Sabtu: 07.30 – 21.00</a></li>
         <li><a href="#">Minggu: 08.00 – 20.00</a></li>
       </ul>
-      <div style="margin-top:24px;">
+      <div style="margin-top:22px">
         <div class="footer-col-title">Follow Us</div>
         <div class="social-links">
-          <a href="https://www.instagram.com/duoshinefitnesss/" target="_blank" title="Instagram">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          <a href="https://www.instagram.com/duoshinefitnesss/" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
           </a>
-          <a href="https://www.facebook.com/duoshinefitness/" target="_blank" title="Facebook">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          <a href="https://www.facebook.com/duoshinefitness/" target="_blank" rel="noopener" title="Facebook" aria-label="Facebook">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
           </a>
-          <a href="https://www.tiktok.com/@duoshinefitness" target="_blank" title="TikTok">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          <a href="https://www.tiktok.com/@duoshinefitness" target="_blank" rel="noopener" title="TikTok" aria-label="TikTok">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
           </a>
         </div>
       </div>
@@ -1662,158 +526,139 @@
   </div>
   <div class="footer-bottom">
     <p>© 2024 <span class="y">Duo Shine Fitness</span>. All rights reserved.</p>
-    <p style="font-size:12px;color:rgba(245,245,240,0.2);">Gym Terbaik Jabodetabek sejak 2007</p>
+    <p>Gym Terbaik Jabodetabek · Est. 2007</p>
   </div>
 </footer>
 
 <script>
-// CURSOR (desktop only)
-const cursor = document.getElementById('cursor');
-const follower = document.getElementById('cursorFollower');
-let mx = 0, my = 0, fx = 0, fy = 0;
-const isTouchDevice = window.matchMedia('(hover: none), (pointer: coarse)').matches;
-if (!isTouchDevice) {
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.transform = `translate(${mx - 6}px, ${my - 6}px)`;
+// ============================================================
+// DUO SHINE FITNESS — main.js (embedded)
+// © 2024 Duo Shine Fitness. All rights reserved.
+// ============================================================
+
+(function() {
+  // LOADER — dismiss after CSS animation completes
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      var loader = document.getElementById('ds-loader');
+      if (loader) loader.classList.add('out');
+    }, 720);
   });
-  function animFollower() {
-    fx += (mx - fx - 18) * 0.12;
-    fy += (my - fy - 18) * 0.12;
-    follower.style.transform = `translate(${fx}px, ${fy}px)`;
-    requestAnimationFrame(animFollower);
-  }
-  animFollower();
-}
 
-// NAV SCROLL
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 60);
-});
+  // CURSOR — desktop only
+  var isMobile = window.matchMedia('(max-width:900px)').matches;
+  if (!isMobile) {
+    var cur = document.getElementById('dsCursor');
+    var ring = document.getElementById('dsCursorRing');
+    var mx = 0, my = 0, rx = 0, ry = 0;
 
-// MOBILE MENU
-function toggleMenu() {
-  const menu = document.getElementById('mobileMenu');
-  const ham = document.getElementById('hamburger');
-  menu.classList.toggle('open');
-  ham.classList.toggle('open');
-  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
-}
-function closeMobile() {
-  document.getElementById('mobileMenu').classList.remove('open');
-  document.getElementById('hamburger').classList.remove('open');
-  document.body.style.overflow = '';
-}
+    document.addEventListener('mousemove', function(e) {
+      mx = e.clientX; my = e.clientY;
+      cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+    });
 
-// SCROLL REVEAL
-const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
+    function animRing() {
+      rx += (mx - rx) * 0.11;
+      ry += (my - ry) * 0.11;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(animRing);
     }
-  });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-revealEls.forEach(el => observer.observe(el));
+    animRing();
 
-// COUNT UP
-function countUp(el, target, duration = 1800) {
-  let start = 0;
-  const step = target / (duration / 16);
-  const timer = setInterval(() => {
-    start += step;
-    if (start >= target) { el.textContent = target; clearInterval(timer); return; }
-    el.textContent = Math.floor(start);
-  }, 16);
-}
-const countEls = document.querySelectorAll('.count');
-const countObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const target = parseInt(entry.target.dataset.target);
-      countUp(entry.target, target);
-      countObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.5 });
-countEls.forEach(el => countObserver.observe(el));
-
-// PARALLAX HERO GRID
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  const grid = document.querySelector('.hero-grid');
-  if (grid) grid.style.transform = `translateY(${scrollY * 0.3}px)`;
-});
-
-// SMOOTH ANCHOR
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-  });
-});
-
-// ABOUT BOX SLIDESHOW
-let aboutIdx = 0;
-const aboutSlides = document.querySelectorAll('#aboutSlides .about-box-slide');
-const aboutDotEls = document.querySelectorAll('#aboutDots .slide-dot');
-function goToSlide(n) {
-  aboutSlides[aboutIdx].classList.remove('active');
-  aboutDotEls[aboutIdx].classList.remove('active');
-  aboutIdx = n;
-  aboutSlides[aboutIdx].classList.add('active');
-  aboutDotEls[aboutIdx].classList.add('active');
-}
-setInterval(() => { goToSlide((aboutIdx + 1) % aboutSlides.length); }, 3500);
-
-// TESTIMONIAL CAROUSEL
-const track = document.getElementById('testiTrack');
-const dotsContainer = document.getElementById('testiDots');
-const cards = track ? track.querySelectorAll('.testi-card') : [];
-let testiIdx = 0;
-let testiPerView = window.innerWidth <= 900 ? 1 : window.innerWidth <= 1200 ? 2 : 3;
-const testiTotal = cards.length;
-let autoplayTimer;
-
-function buildDots() {
-  dotsContainer.innerHTML = '';
-  const totalPages = Math.ceil(testiTotal / testiPerView);
-  for (let i = 0; i < totalPages; i++) {
-    const d = document.createElement('div');
-    d.className = 'testi-dot' + (i === 0 ? ' active' : '');
-    d.onclick = () => { testiGo(i); resetAutoplay(); };
-    dotsContainer.appendChild(d);
+    // Hover effect on links/buttons
+    document.querySelectorAll('a, button, [role="button"]').forEach(function(el) {
+      el.addEventListener('mouseenter', function() { document.body.classList.add('cursor-hover'); });
+      el.addEventListener('mouseleave', function() { document.body.classList.remove('cursor-hover'); });
+    });
   }
-}
 
-function testiGo(page) {
-  const totalPages = Math.ceil(testiTotal / testiPerView);
-  testiIdx = Math.max(0, Math.min(page, totalPages - 1));
-  const cardW = cards[0].offsetWidth + 3;
-  track.style.transform = `translateX(-${testiIdx * testiPerView * cardW}px)`;
-  dotsContainer.querySelectorAll('.testi-dot').forEach((d, i) => d.classList.toggle('active', i === testiIdx));
-}
+  // NAV SCROLL STATE
+  var navbar = document.getElementById('navbar');
+  function handleNavScroll() {
+    if (window.scrollY > 55) { navbar.classList.add('scrolled'); }
+    else { navbar.classList.remove('scrolled'); }
+  }
+  window.addEventListener('scroll', handleNavScroll, { passive: true });
+  handleNavScroll();
 
-function testiSlide(dir) {
-  const totalPages = Math.ceil(testiTotal / testiPerView);
-  testiGo((testiIdx + dir + totalPages) % totalPages);
-  resetAutoplay();
-}
+  // MOBILE MENU
+  window.toggleMenu = function() {
+    var menu = document.getElementById('mobileMenu');
+    var ham = document.getElementById('hamburger');
+    var isOpen = menu.classList.toggle('open');
+    ham.classList.toggle('open');
+    ham.setAttribute('aria-expanded', String(isOpen));
+    menu.setAttribute('aria-hidden', String(!isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  };
+  window.closeMobile = function() {
+    var menu = document.getElementById('mobileMenu');
+    var ham = document.getElementById('hamburger');
+    menu.classList.remove('open');
+    ham.classList.remove('open');
+    ham.setAttribute('aria-expanded', 'false');
+    menu.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
 
-function resetAutoplay() {
-  clearInterval(autoplayTimer);
-  autoplayTimer = setInterval(() => { testiSlide(1); }, 4500);
-}
+  // SCROLL REVEAL
+  var revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
+  revealEls.forEach(function(el) { revealObserver.observe(el); });
 
-window.addEventListener('resize', () => {
-  const newPerView = window.innerWidth <= 900 ? 1 : window.innerWidth <= 1200 ? 2 : 3;
-  if (newPerView !== testiPerView) { testiPerView = newPerView; testiIdx = 0; buildDots(); testiGo(0); }
-});
+  // COUNT UP
+  function countUp(el, target, duration) {
+    duration = duration || 1800;
+    var start = 0;
+    var step = target / (duration / 16);
+    var timer = setInterval(function() {
+      start += step;
+      if (start >= target) { el.textContent = target; clearInterval(timer); return; }
+      el.textContent = Math.floor(start);
+    }, 16);
+  }
+  var countEls = document.querySelectorAll('.count');
+  var countObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        countUp(entry.target, parseInt(entry.target.dataset.target, 10));
+        countObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  countEls.forEach(function(el) { countObserver.observe(el); });
 
-buildDots();
-resetAutoplay();
+  // PARALLAX HERO GRID (desktop only)
+  if (!isMobile) {
+    var heroGrid = document.querySelector('.hero-grid');
+    window.addEventListener('scroll', function() {
+      if (heroGrid) heroGrid.style.transform = 'translateY(' + (window.scrollY * 0.25) + 'px)';
+    }, { passive: true });
+  }
+
+  // SMOOTH SCROLL for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var id = a.getAttribute('href');
+      if (id === '#') return;
+      var target = document.querySelector(id);
+      if (target) {
+        e.preventDefault();
+        var navH = navbar ? navbar.offsetHeight : 70;
+        var top = target.getBoundingClientRect().top + window.scrollY - navH;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    });
+  });
+
+})();
 </script>
 </body>
 </html>
